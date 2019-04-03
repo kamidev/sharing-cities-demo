@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Vector3, _Math } from 'three-full';
+import { PerspectiveCamera, Vector3, _Math, Quaternion } from 'three-full';
 import { Tween } from 'es6-tween';
 
 export default class SCCamera {
@@ -37,13 +37,22 @@ export default class SCCamera {
 
     const startPosition = this.camera.position.clone();
     const startRotation = this.camera.rotation.clone();
+    const startQuaternion = new Quaternion();
+    startQuaternion.setFromEuler(startRotation);
 
     this.camera.position.copy(endPosition);
     this.camera.lookAt(worldPosition);
     const endRotation = this.camera.rotation.clone();
+    const endQuaternion = new Quaternion();
+    endQuaternion.setFromEuler(endRotation);
+
+    const angleTo = startQuaternion.angleTo(endQuaternion);
+    console.log(angleTo);
 
     this.camera.position.copy(startPosition);
     this.camera.rotation.copy(startRotation);
+
+    // NOTE: USE SLERP
 
     // TWEEN
     /*const t1 = new Tween(this.camera.position).to({
