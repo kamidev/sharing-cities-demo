@@ -3,14 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "es6-tween": "^5.4.1",
+    "gh-pages": "^2.0.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-scripts": "2.1.5",
-    "three": "^0.102.1",
     "three-full": "^17.1.0",
-    "three-orbitcontrols": "^2.101.1"
+    "vox.js": "^1.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -24,5 +28,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "homepage": "https://galnegus.github.io/sharing-cities-demo/"
 }
