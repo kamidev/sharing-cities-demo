@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/sharing-cities-demo/precache-manifest.ff8c95e2a97edb608214cc41ed822ebf.js"
+  "/sharing-cities-demo/precache-manifest.9d24c0d2277eabe35e5e9b1b7b936448.js"
 );
 
 workbox.clientsClaim();
