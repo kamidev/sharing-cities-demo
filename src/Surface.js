@@ -10,7 +10,7 @@ const material = new MeshBasicMaterial({
 });
 
 export default class Surface {
-  constructor(width, height, position, rotation, Component, cameraView, setCameraView) {
+  constructor(width, height, position, rotation, up, Component, cameraView, setCameraView) {
     this.width = width;
     this.height = height;
 
@@ -31,6 +31,7 @@ export default class Surface {
     this.mesh = new Mesh(this.geometry, material);
     this.mesh.position.copy(position);
     this.mesh.rotation.copy(rotation);
+    this.mesh.up = up;
     this.mesh.castShadow = false;
     this.mesh.receiveShadow = true;
   }

@@ -71,11 +71,12 @@ class App extends Component {
     //glScene.add( pointLightHelper );
 
     this.surfaces = [
-      new Surface(1000, 1000, new THREE.Vector3(500, 0, -500), new THREE.Euler(0, -Math.PI / 2, 0), Test, this.state.cameraView, this.setCameraView),
-      new Surface(1000, 1000, new THREE.Vector3(0, 0, 0), new THREE.Euler(0, Math.PI, 0), Test, this.state.cameraView, this.setCameraView),
-      new Surface(1000, 1000, new THREE.Vector3(-500, 0, -500), new THREE.Euler(0, Math.PI / 2, 0), Test, this.state.cameraView, this.setCameraView),
-      new Surface(1000, 1000, new THREE.Vector3(0, -500, -500), new THREE.Euler(Math.PI / 2, Math.PI, 0), Test, this.state.cameraView, this.setCameraView)
+      new Surface(1000, 1000, new THREE.Vector3(500, 0, -500), new THREE.Euler(0, -Math.PI / 2, 0), new THREE.Vector3(0, 1, 0), Test, this.state.cameraView, this.setCameraView),
+      new Surface(1000, 1000, new THREE.Vector3(0, 0, 0), new THREE.Euler(0, Math.PI, 0), new THREE.Vector3(0, 1, 0), Test, this.state.cameraView, this.setCameraView),
+      new Surface(1000, 1000, new THREE.Vector3(-500, 0, -500), new THREE.Euler(0, Math.PI / 2, 0), new THREE.Vector3(0, 1, 0), Test, this.state.cameraView, this.setCameraView),
+      new Surface(1000, 1000, new THREE.Vector3(0, -500, -500), new THREE.Euler(Math.PI / 2, Math.PI, 0), new THREE.Vector3(0, 0, 1), Test, this.state.cameraView, this.setCameraView)
     ];
+    this.surfaces[3].mesh.up.set(0, 0, 1);
     for (const surface of this.surfaces) {
       surface.load(glScene, cssScene);
       surface.render();
@@ -140,7 +141,14 @@ class App extends Component {
         <div className="app__content" ref={this.appContent} />
         <div className="app__overlay">
           {this.state.cameraView !== null &&
-            <button onClick={() => this.setState({cameraView: null})}>Overview</button>
+            <div className="app__back-to-overlay" onClick={() => this.setState({cameraView: null})}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="6 6 36 36">
+                  <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
+              </svg>
+              <div>
+                <span>Back to overview</span>
+              </div>
+            </div>
           }
         </div>
       </div>
