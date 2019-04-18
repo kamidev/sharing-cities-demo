@@ -1,36 +1,25 @@
-import React, { Component, createRef } from 'react';
+import React, { useRef, useState, useEffect, Fragment } from 'react';
 import * as THREE from 'three-full';
-import TWEEN, { update } from 'es6-tween';
+import { update } from 'es6-tween';
 import SCCamera from './scCamera.js';
 import Surface from './Surface';
 import Test from './Test.jsx';
 import roomGLB from './assets/glb/room.glb';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+function App(props) {
+  const [cameraView, setCameraView] = useState(null);
+  const [surfaces, setSurfaces] = useState([]);
 
-    this.state = {
-      cameraView: null
-    };
+  const appContent = useRef(null);
+  const scCamera = useRef(null);
 
-    this.appContent = createRef();
-    this.surfaces = [];
-    this.scCamera = new SCCamera();
-    this.setCameraView = this.setCameraView.bind(this);
-  }
-
-  setCameraView(cameraView) {
-    this.setState({cameraView});
-  }
-
-  componentDidMount() {
-    //new THREE.OrbitControls(scCamera.camera);
-
+  useEffect(() => {
     const glScene = new THREE.Scene();
     const bgScene = new THREE.Scene();
     const cssScene = new THREE.Scene();
+
+    scCamera.current = new SCCamera();
     
     // cube
     const geometry = new THREE.BoxGeometry(200, 200, 200);
@@ -70,17 +59,45 @@ class App extends Component {
     //const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
     //glScene.add( pointLightHelper );
 
-    this.surfaces = [
-      new Surface(1000, 1000, new THREE.Vector3(500, 0, -500), new THREE.Euler(0, -Math.PI / 2, 0), new THREE.Vector3(0, 1, 0), Test, this.state.cameraView, this.setCameraView),
-      new Surface(1000, 1000, new THREE.Vector3(0, 0, 0), new THREE.Euler(0, Math.PI, 0), new THREE.Vector3(0, 1, 0), Test, this.state.cameraView, this.setCameraView),
-      new Surface(1000, 1000, new THREE.Vector3(-500, 0, -500), new THREE.Euler(0, Math.PI / 2, 0), new THREE.Vector3(0, 1, 0), Test, this.state.cameraView, this.setCameraView),
-      new Surface(1000, 1000, new THREE.Vector3(0, -500, -500), new THREE.Euler(Math.PI / 2, Math.PI, 0), new THREE.Vector3(0, 0, 1), Test, this.state.cameraView, this.setCameraView)
-    ];
-    this.surfaces[3].mesh.up.set(0, 0, 1);
-    for (const surface of this.surfaces) {
-      surface.load(glScene, cssScene);
-      surface.render();
-    }
+    const surfaceDeps = { cameraView, setCameraView, glScene, cssScene };
+    setSurfaces([
+      new Surface({
+        width: 1000,
+        height: 1000, 
+        position: new THREE.Vector3(500, 0, -500), 
+        rotation: new THREE.Euler(0, -Math.PI / 2, 0), 
+        up: new THREE.Vector3(0, 1, 0), 
+        Component: Test,
+        ...surfaceDeps
+      }),
+      new Surface({
+        width: 1000, 
+        height: 1000, 
+        position: new THREE.Vector3(0, 0, 0), 
+        rotation: new THREE.Euler(0, Math.PI, 0), 
+        up: new THREE.Vector3(0, 1, 0), 
+        Component: Test, 
+        ...surfaceDeps
+      }),
+      new Surface({
+        width: 1000, 
+        height: 1000, 
+        position: new THREE.Vector3(-500, 0, -500), 
+        rotation: new THREE.Euler(0, Math.PI / 2, 0), 
+        up: new THREE.Vector3(0, 1, 0), 
+        Component: Test, 
+        ...surfaceDeps
+      }),
+      new Surface({
+        width: 1000, 
+        height: 1000, 
+        position: new THREE.Vector3(0, -500, -500), 
+        rotation: new THREE.Euler(Math.PI / 2, Math.PI, 0), 
+        up: new THREE.Vector3(0, 0, 1), 
+        Component: Test, 
+        ...surfaceDeps
+      })
+    ]);
 
     const bgRenderer = new THREE.WebGLRenderer({ alpha: true });
     bgRenderer.setClearColor(0x000000, 0);
@@ -89,14 +106,14 @@ class App extends Component {
     bgRenderer.domElement.style.position = 'absolute';
     bgRenderer.domElement.style.top = 0;
     bgRenderer.domElement.style.left = 0;
-    this.appContent.current.appendChild(bgRenderer.domElement);
+    appContent.current.appendChild(bgRenderer.domElement);
 
     const cssRenderer = new THREE.CSS3DRenderer();
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
     cssRenderer.domElement.style.position = 'absolute';
     cssRenderer.domElement.style.top = 0;
     cssRenderer.domElement.style.left = 0;
-    this.appContent.current.appendChild(cssRenderer.domElement);
+    appContent.current.appendChild(cssRenderer.domElement);
 
     const glRenderer = new THREE.WebGLRenderer({ alpha: true });
     glRenderer.setClearColor(0x000000, 0);
@@ -106,42 +123,37 @@ class App extends Component {
     glRenderer.domElement.style.top = 0;
     glRenderer.domElement.style.left = 0;
     glRenderer.domElement.style.pointerEvents = 'none';
-    this.appContent.current.appendChild(glRenderer.domElement);
+    appContent.current.appendChild(glRenderer.domElement);
 
     const animate = (time) => {
       requestAnimationFrame(animate);
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
-      bgRenderer.render(bgScene, this.scCamera.camera);
-      cssRenderer.render(cssScene, this.scCamera.camera);
-      glRenderer.render(glScene, this.scCamera.camera);
+      bgRenderer.render(bgScene, scCamera.current.camera);
+      cssRenderer.render(cssScene, scCamera.current.camera);
+      glRenderer.render(glScene, scCamera.current.camera);
       update(time);
     };
 
     animate();
-  }
+  }, []);
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.cameraView === this.state.cameraView) return;
+  useEffect(() => {
+    scCamera.current.goToSurface(cameraView);
+  }, [cameraView]);
 
-    for (const surface of this.surfaces) {
-      surface.update(this.state.cameraView);
-    }
-    this.scCamera.goToSurface(this.state.cameraView);
-  }
+  const surfaceComponents = surfaces.map((surface, i) =>
+    <surface.Component key={i} cameraView={cameraView} setCameraView={setCameraView} surface={surface} />
+  );
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextState.cameraView !== this.state.cameraView) return true;
-    return false;
-  }
-
-  render() {
-    return (
+  return (
+    <Fragment>
+      {surfaceComponents}
       <div className="app">
-        <div className="app__content" ref={this.appContent} />
+        <div className="app__content" ref={appContent} />
         <div className="app__overlay">
-          {this.state.cameraView !== null &&
-            <div className="app__back-to-overlay" onClick={() => this.setState({cameraView: null})}>
+          {cameraView !== null &&
+            <div className="app__back-to-overlay" onClick={() => setCameraView(null)}>
               <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="6 6 36 36">
                   <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z"/>
               </svg>
@@ -152,8 +164,8 @@ class App extends Component {
           }
         </div>
       </div>
-    );
-  }
+    </Fragment>
+  );
 }
 
 export default App;

@@ -1,6 +1,5 @@
-import React from 'react';
-import { render } from 'react-dom';
 import { MeshBasicMaterial, DoubleSide, CSS3DObject, PlaneBufferGeometry, Mesh, NoBlending } from 'three-full';
+import wrapSurface from './wrapSurface';
 
 const material = new MeshBasicMaterial({
   opacity: 0,
@@ -10,7 +9,7 @@ const material = new MeshBasicMaterial({
 });
 
 export default class Surface {
-  constructor(width, height, position, rotation, up, Component, cameraView, setCameraView) {
+  constructor({ width, height, position, rotation, up, Component, cameraView, setCameraView, glScene, cssScene }) {
     this.width = width;
     this.height = height;
 
@@ -23,7 +22,7 @@ export default class Surface {
     this.object.position.copy(position);
     this.object.rotation.copy(rotation);
 
-    this.Component = Component;
+    this.Component = wrapSurface(Component);
     this.cameraView = cameraView;
     this.setCameraView = setCameraView;
 
@@ -34,20 +33,8 @@ export default class Surface {
     this.mesh.up = up;
     this.mesh.castShadow = false;
     this.mesh.receiveShadow = true;
-  }
 
-  update(cameraView) {
-    this.cameraView = cameraView;
-    this.render();
-  }
-
-  load(glScene, cssScene) {
     glScene.add(this.mesh);
     cssScene.add(this.object);
-  }
-
-  render() {
-    if (this.Component !== null)
-      render(<this.Component cameraView={this.cameraView} setCameraView={this.setCameraView} surface={this} />, this.element);
   }
 }

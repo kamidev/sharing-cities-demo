@@ -1,24 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './Test.css';
 
 function Test(props) {
+  const [test, setTest] = useState(0);
+
   const cameraViewIsHere = props.cameraView === props.surface;
-  const cameraViewIsOverview = props.cameraView === null;
 
   return (
     <div className="test">
-      <div className={`test__content ${!cameraViewIsHere ? 'test__content--no-pointer' : ''}`}>
-        <h1>Hello World</h1>
-        {cameraViewIsHere &&
-          <h3>Camera is here</h3>
-        }
-        <button onClick={() => alert("Hello World")}>Click me</button>
-      </div>
-      <div
-        className={`test__overlay ${!cameraViewIsOverview ? 'test__overlay--hidden' : ''}`}
-        onClick={() => props.setCameraView(props.surface)}
-      />
+      <h1>Hello World</h1>
+      <p>{test}</p>
+      {cameraViewIsHere &&
+        <h3>Camera is here</h3>
+      }
+      <button onClick={() => setTest(test + 1)}>Click me</button>
     </div>
   );
 }
