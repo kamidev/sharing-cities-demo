@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, Fragment } from 'react';
 import * as THREE from 'three-full';
 import { update } from 'es6-tween';
+import debounce from 'lodash.debounce';
 import SCCamera from './scCamera.js';
 import Surface from './Surface';
 import Test from './Test.jsx';
@@ -124,6 +125,15 @@ function App(props) {
     glRenderer.domElement.style.left = 0;
     glRenderer.domElement.style.pointerEvents = 'none';
     appContent.current.appendChild(glRenderer.domElement);
+
+    const onResize = debounce(() => {
+      scCamera.current.camera.aspect = window.innerWidth / window.innerHeight;
+      scCamera.current.camera.updateProjectionMatrix();
+      bgRenderer.setSize(window.innerWidth, window.innerHeight);
+      cssRenderer.setSize(window.innerWidth, window.innerHeight);
+      glRenderer.setSize(window.innerWidth, window.innerHeight);
+    }, 100);
+    window.addEventListener('resize', onResize);
 
     const animate = (time) => {
       requestAnimationFrame(animate);
