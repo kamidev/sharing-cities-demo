@@ -1,17 +1,20 @@
-.wrapped-surface {
+.surface {
   position: relative;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+}
+
+.surface__content {
   width: 100%;
   height: 100%;
 }
 
-.wrapped-surface__content {
-}
-
-.wrapped-surface__content--no-pointer {
+.surface__content--no-pointer {
   pointer-events: none;
 }
 
-.wrapped-surface__overlay {
+.surface__overlay {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -24,11 +27,11 @@
   opacity: 0.2;
 }
 
-.wrapped-surface__overlay:hover {
+.surface__overlay:hover {
   opacity: 0.5;
 }
 
-.wrapped-surface__overlay--hidden {
+.surface__overlay--hidden {
   opacity: 0;
   pointer-events: none;
 }

@@ -1,122 +1,125 @@
 import React, { useRef, useState, useEffect, Fragment } from 'react';
-import * as THREE from 'three-full';
+import { Scene, DoubleSide, BoxGeometry, MeshPhongMaterial, Mesh, GLTFLoader, PointLight, Vector3, Euler, WebGLRenderer, CSS3DRenderer } from 'three-full';
 import { update } from 'es6-tween';
 import debounce from 'lodash.debounce';
-import SCCamera from './scCamera.js';
-import Surface from './Surface';
+import Surface from './Surface/Surface.js';
 import Test from './Test.jsx';
+import Board from './Board';
 import roomGLB from './assets/glb/room.glb';
+import SCCamera from './scCamera.js';
 import './App.css';
+
+const scCamera = new SCCamera();
+const glScene = new Scene();
+const bgScene = new Scene();
+const cssScene = new Scene();
+export const surfaceDeps = { glScene, cssScene, toCamera: (surface) => scCamera.toCamera(surface) };
+
+// cube
+const geometry = new BoxGeometry(200, 200, 200);
+const material = new MeshPhongMaterial({
+  color: 0xff0000,
+  emissive: 0x000000,
+  specular: 0x111111,
+  side: DoubleSide,
+  flatShading: false,
+  shininess: 30
+});
+const cube = new Mesh(geometry, material);
+cube.position.z = -250;
+cube.position.x = 250;
+cube.position.y = 250;
+glScene.add(cube);
+
+const cubeShadow = new Mesh(geometry, material.clone());
+cubeShadow.castShadow = true;
+cubeShadow.material.transparent = true;
+cubeShadow.material.opacity = 0;
+cubeShadow.position.copy(cube.position);
+bgScene.add(cubeShadow);
+
+const loader = new GLTFLoader();
+loader.load(roomGLB, function (gltf) {
+  gltf.scene.scale.multiplyScalar(100);
+  gltf.scene.rotation.y = Math.PI;
+  gltf.scene.position.y = -500;
+  gltf.scene.position.z = -500;
+  gltf.scene.children[0].receiveShadow = true;
+  bgScene.add(gltf.scene);
+});
+
+// light
+const pointLight = new PointLight(0xffffff, 0.8, 0, 2);
+pointLight.castShadow = true;
+pointLight.position.z = -1000;
+pointLight.shadow.mapSize.width = 2048;  // default
+pointLight.shadow.mapSize.height = 2048; // default
+pointLight.shadow.camera.near = 0.5;       // default
+pointLight.shadow.camera.far = 5000      // default
+glScene.add(pointLight);
+bgScene.add(new PointLight().copy(pointLight));
+//const sphereSize = 100;
+//const pointLightHelper = new PointLightHelper( pointLight, sphereSize );
+//glScene.add( pointLightHelper );
+
+const surfaces = {
+  leftWall: new Surface({
+    width: 1000,
+    height: 1000, 
+    position: new Vector3(500, 0, -500), 
+    rotation: new Euler(0, -Math.PI / 2, 0), 
+    up: new Vector3(0, 1, 0), 
+    ...surfaceDeps
+  }),
+  backWall: new Surface({
+    width: 1000, 
+    height: 1000, 
+    position: new Vector3(0, 0, 0), 
+    rotation: new Euler(0, Math.PI, 0), 
+    up: new Vector3(0, 1, 0), 
+    ...surfaceDeps
+  }),
+  rightWall: new Surface({
+    width: 1000, 
+    height: 1000, 
+    position: new Vector3(-500, 0, -500), 
+    rotation: new Euler(0, Math.PI / 2, 0), 
+    up: new Vector3(0, 1, 0), 
+    ...surfaceDeps
+  }),
+  floor: new Surface({
+    width: 1000, 
+    height: 1000, 
+    position: new Vector3(0, -500, -500), 
+    rotation: new Euler(Math.PI / 2, Math.PI, 0), 
+    up: new Vector3(0, 0, 1), 
+    ...surfaceDeps
+  })
+};
 
 function App(props) {
   const [cameraView, setCameraView] = useState(null);
-  const [surfaces, setSurfaces] = useState([]);
-
-  const appContent = useRef(null);
-  const scCamera = useRef(null);
-
+  const appContentRef = useRef(null);
+ 
   useEffect(() => {
-    const glScene = new THREE.Scene();
-    const bgScene = new THREE.Scene();
-    const cssScene = new THREE.Scene();
-
-    scCamera.current = new SCCamera();
-    
-    // cube
-    const geometry = new THREE.BoxGeometry(200, 200, 200);
-    const material = new THREE.MeshPhongMaterial({
-      color: 0xff0000,
-      emissive: 0x000000,
-      specular: 0x111111,
-      side: THREE.DoubleSide,
-      flatShading: false,
-      shininess: 30,
-    });
-    const cube = new THREE.Mesh(geometry, material);
-    cube.position.z = -250;
-    cube.position.x = 250;
-    cube.position.y = 250;
-    cube.castShadow = true;
-    cube.receiveShadow = false;
-    glScene.add(cube);
-
-    var loader = new THREE.GLTFLoader();
-    loader.load(roomGLB, function (gltf) {
-      gltf.scene.scale.multiplyScalar(100);
-      gltf.scene.rotation.y = Math.PI;
-      gltf.scene.position.y = -500;
-      gltf.scene.position.z = -500;
-      gltf.scene.receiveShadow = true;
-      bgScene.add(gltf.scene);
-    });
-
-    // light
-    const pointLight = new THREE.PointLight(0xffffff, 0.8, 0, 2);
-    pointLight.castShadow = true;
-    pointLight.position.z = -1000;
-    glScene.add(pointLight);
-    bgScene.add(new THREE.PointLight().copy(pointLight));
-    //const sphereSize = 100;
-    //const pointLightHelper = new THREE.PointLightHelper( pointLight, sphereSize );
-    //glScene.add( pointLightHelper );
-
-    const surfaceDeps = { cameraView, setCameraView, glScene, cssScene };
-    setSurfaces([
-      new Surface({
-        width: 1000,
-        height: 1000, 
-        position: new THREE.Vector3(500, 0, -500), 
-        rotation: new THREE.Euler(0, -Math.PI / 2, 0), 
-        up: new THREE.Vector3(0, 1, 0), 
-        Component: Test,
-        ...surfaceDeps
-      }),
-      new Surface({
-        width: 1000, 
-        height: 1000, 
-        position: new THREE.Vector3(0, 0, 0), 
-        rotation: new THREE.Euler(0, Math.PI, 0), 
-        up: new THREE.Vector3(0, 1, 0), 
-        Component: Test, 
-        ...surfaceDeps
-      }),
-      new Surface({
-        width: 1000, 
-        height: 1000, 
-        position: new THREE.Vector3(-500, 0, -500), 
-        rotation: new THREE.Euler(0, Math.PI / 2, 0), 
-        up: new THREE.Vector3(0, 1, 0), 
-        Component: Test, 
-        ...surfaceDeps
-      }),
-      new Surface({
-        width: 1000, 
-        height: 1000, 
-        position: new THREE.Vector3(0, -500, -500), 
-        rotation: new THREE.Euler(Math.PI / 2, Math.PI, 0), 
-        up: new THREE.Vector3(0, 0, 1), 
-        Component: Test, 
-        ...surfaceDeps
-      })
-    ]);
-
-    const bgRenderer = new THREE.WebGLRenderer({ alpha: true });
+    const bgRenderer = new WebGLRenderer({ alpha: true });
     bgRenderer.setClearColor(0x000000, 0);
     bgRenderer.setPixelRatio(window.devicePixelRatio);
     bgRenderer.setSize(window.innerWidth, window.innerHeight);
     bgRenderer.domElement.style.position = 'absolute';
     bgRenderer.domElement.style.top = 0;
     bgRenderer.domElement.style.left = 0;
-    appContent.current.appendChild(bgRenderer.domElement);
+    bgRenderer.shadowMap.enabled = true;
+    appContentRef.current.appendChild(bgRenderer.domElement);
 
-    const cssRenderer = new THREE.CSS3DRenderer();
+    const cssRenderer = new CSS3DRenderer();
     cssRenderer.setSize(window.innerWidth, window.innerHeight);
     cssRenderer.domElement.style.position = 'absolute';
     cssRenderer.domElement.style.top = 0;
     cssRenderer.domElement.style.left = 0;
-    appContent.current.appendChild(cssRenderer.domElement);
+    appContentRef.current.appendChild(cssRenderer.domElement);
 
-    const glRenderer = new THREE.WebGLRenderer({ alpha: true });
+    const glRenderer = new WebGLRenderer({ alpha: true });
     glRenderer.setClearColor(0x000000, 0);
     glRenderer.setPixelRatio(window.devicePixelRatio);
     glRenderer.setSize(window.innerWidth, window.innerHeight);
@@ -124,11 +127,11 @@ function App(props) {
     glRenderer.domElement.style.top = 0;
     glRenderer.domElement.style.left = 0;
     glRenderer.domElement.style.pointerEvents = 'none';
-    appContent.current.appendChild(glRenderer.domElement);
+    appContentRef.current.appendChild(glRenderer.domElement);
 
     const onResize = debounce(() => {
-      scCamera.current.camera.aspect = window.innerWidth / window.innerHeight;
-      scCamera.current.camera.updateProjectionMatrix();
+      scCamera.camera.aspect = window.innerWidth / window.innerHeight;
+      scCamera.camera.updateProjectionMatrix();
       bgRenderer.setSize(window.innerWidth, window.innerHeight);
       cssRenderer.setSize(window.innerWidth, window.innerHeight);
       glRenderer.setSize(window.innerWidth, window.innerHeight);
@@ -138,10 +141,12 @@ function App(props) {
     const animate = (time) => {
       requestAnimationFrame(animate);
       cube.rotation.x += 0.01;
+      cubeShadow.rotation.x += 0.01;
       cube.rotation.y += 0.01;
-      bgRenderer.render(bgScene, scCamera.current.camera);
-      cssRenderer.render(cssScene, scCamera.current.camera);
-      glRenderer.render(glScene, scCamera.current.camera);
+      cubeShadow.rotation.y += 0.01;
+      bgRenderer.render(bgScene, scCamera.camera);
+      cssRenderer.render(cssScene, scCamera.camera);
+      glRenderer.render(glScene, scCamera.camera);
       update(time);
     };
 
@@ -149,18 +154,28 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    scCamera.current.goToSurface(cameraView);
+    scCamera.goToSurface(cameraView);
   }, [cameraView]);
 
-  const surfaceComponents = surfaces.map((surface, i) =>
-    <surface.Component key={i} cameraView={cameraView} setCameraView={setCameraView} surface={surface} />
-  );
+  const { leftWall, backWall, rightWall, floor } = surfaces || {};
 
   return (
     <Fragment>
-      {surfaceComponents}
+      <leftWall.Component>
+        <Test cameraView={cameraView} setCameraView={setCameraView} surface={leftWall} />
+      </leftWall.Component>
+      <backWall.Component>
+        <Board cameraView={cameraView} setCameraView={setCameraView} surface={backWall} />
+      </backWall.Component>
+      <rightWall.Component>
+        <Test cameraView={cameraView} setCameraView={setCameraView} surface={rightWall} />
+      </rightWall.Component>
+      <floor.Component>
+        <Test cameraView={cameraView} setCameraView={setCameraView} surface={floor} />
+      </floor.Component>
+
       <div className="app">
-        <div className="app__content" ref={appContent} />
+        <div className="app__content" ref={appContentRef} />
         <div className="app__overlay">
           {cameraView !== null &&
             <div className="app__back-to-overlay" onClick={() => setCameraView(null)}>

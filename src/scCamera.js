@@ -70,4 +70,31 @@ export default class SCCamera {
       this.camera.quaternion.copy(q);
     }).start();
   }
+
+  // returns [position, rotation]
+  toCamera(surface) {
+    // TODO: fix this padding crap
+    const padding = 500;
+    const fov = _Math.degToRad(this.camera.fov);
+    const dist = (surface.height + (padding * 2 * surface.height / window.innerHeight)) / (2 * Math.tan(fov / 2));
+
+    const worldPosition = new Vector3();
+    this.camera.getWorldPosition(worldPosition);
+
+    const targetPosition = new Vector3();
+    this.camera.getWorldDirection(targetPosition);
+    targetPosition.multiplyScalar(dist);
+    targetPosition.add(worldPosition);
+
+    const startPosition = surface.mesh.position.clone();
+    const startRotation = surface.mesh.rotation.clone();
+
+    surface.mesh.position.copy(targetPosition);
+    surface.mesh.lookAt(worldPosition);
+    const targetRotation = surface.mesh.rotation.clone();
+
+    surface.mesh.position.copy(startPosition);
+    surface.mesh.rotation.copy(startRotation);
+    return [targetPosition, targetRotation];
+  }
 }

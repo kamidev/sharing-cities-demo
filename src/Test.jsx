@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
+import withMainSurface from './Surface/withMainSurface';
 import './Test.css';
 
 function Test(props) {
   const [test, setTest] = useState(0);
+  const buttonRef = useRef(null);
 
-  const cameraViewIsHere = props.cameraView === props.surface;
+  const isCameraHere = props.cameraView === props.surface;
 
   return (
     <div className="test">
       <h1>Hello World</h1>
       <p>{test}</p>
-      {cameraViewIsHere &&
+      {isCameraHere &&
         <h3>Camera is here</h3>
       }
-      <button onClick={() => setTest(test + 1)}>Click me</button>
+      <button onClick={() => setTest(test + 1)} ref={buttonRef}>Click me</button>
     </div>
   );
 }
@@ -25,4 +27,4 @@ Test.propTypes = {
   surface: PropTypes.object.isRequired
 };
 
-export default Test;
+export default withMainSurface(Test);
