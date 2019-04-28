@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Surface from './Surface.js';
-import useAnchorData from './useAnchorData';
+import useGetAnchorData from './useGetAnchorData';
 
 const SurfaceComponent = ({ children, element }) => {
   return createPortal((
@@ -30,7 +30,7 @@ class AnchoredSurface extends Surface {
     const [initialized, setInitialized] = useState(false);
     const anchorRef = useRef(null);
 
-    const anchorData = useAnchorData(this.args.parent, anchorRef);
+    const anchorData = useGetAnchorData(this.args.parent, anchorRef);
     
     useEffect(() => {
       if (anchorData === null) return;
@@ -40,6 +40,7 @@ class AnchoredSurface extends Surface {
         up: anchorData.up, 
         ...this.args
       });
+
       setInitialized(true);
     }, [anchorData]);
 

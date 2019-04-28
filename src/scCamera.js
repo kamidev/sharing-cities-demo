@@ -10,6 +10,15 @@ export default class SCCamera {
 
     this.camera.position.copy(this.defaultPosition);
     this.camera.rotation.copy(this.defaultRotation);
+
+    this.transitionInfo = {
+      running: false,
+      targetPosition: null,
+      targetRotation: null,
+    };
+
+    this.positionTween = null;
+    this.rotationTween = null;
   }
 
   goToOverview() {
@@ -24,8 +33,11 @@ export default class SCCamera {
 
     this.camera.up.copy(surface.mesh.up);
 
+    // padding is empty space in pixels (on screen) above and below the surface
+    const padding = 100;
     const fov = _Math.degToRad(this.camera.fov);
-    const dist = (surface.height + 100) / (2 * Math.tan(fov / 2));
+    const q = 2 * padding / window.innerHeight;
+    const dist = (surface.height / (1 - q)) / (2 * Math.tan(fov / 2));
 
     const worldPosition = new Vector3();
     surface.mesh.getWorldPosition(worldPosition);
@@ -49,10 +61,15 @@ export default class SCCamera {
   }
 
   transition(targetPosition, targetRotation) {
+    this.transitionInfo = {
+      targetPosition,
+      targetRotation
+    };
+
     // TWEEN
     const duration = 800;
 
-    new Tween(this.camera.position).easing(Easing.Cubic.Out).to({
+    this.positionTween = new Tween(this.camera.position).easing(Easing.Cubic.Out).to({
       x: targetPosition.x,
       y: targetPosition.y,
       z: targetPosition.z
@@ -65,18 +82,32 @@ export default class SCCamera {
     const endQuaternion = new Quaternion();
     endQuaternion.setFromEuler(targetRotation);
     let q = new Quaternion();
-    new Tween({t: 0}).to({t: 1}, duration).easing(Easing.Cubic.Out).on('update', ({t}) =>{
+    this.rotationTween = new Tween({t: 0}).to({t: 1}, duration).easing(Easing.Cubic.Out).on('update', ({t}) =>{
       Quaternion.slerp(startQuaternion, endQuaternion, q, t);
       this.camera.quaternion.copy(q);
     }).start();
   }
 
+  isTransitionRunning() {
+    if (this.positionTween === null || this.rotationTween === null) return false;
+    return this.positionTween.isPlaying() || this.rotationTween.isPlaying();
+  }
+
   // returns [position, rotation]
   toCamera(surface) {
-    // TODO: fix this padding crap
-    const padding = 500;
+    const cameraOriginalPosition = this.camera.position.clone();
+    const cameraOriginalRotation = this.camera.rotation.clone();
+    let transition = this.isTransitionRunning(); // In the TINY chance that running changes while this function is running, store its value here and use that instead.
+    if (transition) {
+      this.camera.position.copy(this.transitionInfo.targetPosition);
+      this.camera.rotation.copy(this.transitionInfo.targetRotation);
+    }
+
+    // padding is empty space in pixels (on screen) above and below the surface
+    const padding = 100;
     const fov = _Math.degToRad(this.camera.fov);
-    const dist = (surface.height + (padding * 2 * surface.height / window.innerHeight)) / (2 * Math.tan(fov / 2));
+    const q = 2 * padding / window.innerHeight;
+    const dist = (surface.height / (1 - q)) / (2 * Math.tan(fov / 2));
 
     const worldPosition = new Vector3();
     this.camera.getWorldPosition(worldPosition);
@@ -95,6 +126,11 @@ export default class SCCamera {
 
     surface.mesh.position.copy(startPosition);
     surface.mesh.rotation.copy(startRotation);
+
+    if (transition) {
+      this.camera.position.copy(cameraOriginalPosition);
+      this.camera.rotation.copy(cameraOriginalRotation);
+    }
     return [targetPosition, targetRotation];
   }
 }

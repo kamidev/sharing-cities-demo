@@ -162,7 +162,7 @@ function App(props) {
   return (
     <Fragment>
       <leftWall.Component>
-        <Test cameraView={cameraView} setCameraView={setCameraView} surface={leftWall} />
+        <Board cameraView={cameraView} setCameraView={setCameraView} surface={leftWall} />
       </leftWall.Component>
       <backWall.Component>
         <Board cameraView={cameraView} setCameraView={setCameraView} surface={backWall} />

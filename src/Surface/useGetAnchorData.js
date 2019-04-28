@@ -13,18 +13,25 @@ function offset(element) {
   };
 }
 
-export default function useAnchorData(surface, anchorRef) {
+export default function useGetAnchorData(surface, anchorRef) {
   const [anchorData, setAnchorData] = useState(null);
 
   useEffect(() => {
-    const rightDirection = surface.mesh.localToWorld(new Vector3(1, 0, 0));
-    const downDirection = surface.mesh.localToWorld(new Vector3(0, -1, 0));
-    const outDirection = surface.mesh.localToWorld(new Vector3(0, 0, 1));
-    
-    // top-left corner has index 0 in the position attribute.
+    // top-left corner has index := 0
     const vertices = surface.geometry.getAttribute('position');
     const i = 0;
     const topLeft = surface.mesh.localToWorld(new Vector3(vertices.getX(i), vertices.getY(i), vertices.getZ(i)))
+
+    const origin = new Vector3();
+    surface.mesh.getWorldPosition(origin);
+    const rightDirection = new Vector3().subVectors(surface.mesh.localToWorld(new Vector3(1, 0, 0)), origin);
+    const downDirection = new Vector3().subVectors(surface.mesh.localToWorld(new Vector3(0, -1, 0)), origin);
+    const outDirection = new Vector3();
+    surface.mesh.getWorldDirection(outDirection);
+
+    rightDirection.normalize();
+    downDirection.normalize();
+    outDirection.normalize();
     
     const anchorOffset = offset(anchorRef.current);
     anchorOffset.left += anchorRef.current.offsetWidth / 2;
