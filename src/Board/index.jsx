@@ -1,31 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import AnchoredSurface from '../Surface/AnchoredSurface';
+import AnchoredSurface from '../Surface/AnchoredSurface.jsx';
 import Pamphlet from './Pamphlet';
 import withMainSurface from '../Surface/withMainSurface';
-import { surfaceDeps } from '../App';
+import { surfaceDeps } from '../render';
 import './Board.css';
 
 function Board(props) {
-  const [anchoredSurface, setAnchoredSurface] = useState(null);
-
-  useEffect(() => {
-    setAnchoredSurface(new AnchoredSurface({
-      width: 100,
-      height: 150,
-      parent: props.surface,
-      ...surfaceDeps
-    }));
-  }, [props.surface]);
-
   return (
     <div className="board">
       <div className="board__content">
-      {anchoredSurface &&
-        <anchoredSurface.Component>
-          <Pamphlet cameraView={props.cameraView} setCameraView={props.setCameraView} surface={anchoredSurface} />
-        </anchoredSurface.Component>
-      }
+        <AnchoredSurface width={100} height={150} parent={props.surface} scaleFactor={0.2} {...surfaceDeps}>
+          <Pamphlet cameraView={props.cameraView} setCameraView={props.setCameraView} />
+        </AnchoredSurface>
+        <AnchoredSurface width={100} height={150} parent={props.surface} scaleFactor={0.5} {...surfaceDeps}>
+          <Pamphlet cameraView={props.cameraView} setCameraView={props.setCameraView} />
+        </AnchoredSurface>
+        <AnchoredSurface width={100} height={150} parent={props.surface} scaleFactor={1} {...surfaceDeps}>
+          <Pamphlet cameraView={props.cameraView} setCameraView={props.setCameraView} />
+        </AnchoredSurface>
       </div>
     </div>
   );

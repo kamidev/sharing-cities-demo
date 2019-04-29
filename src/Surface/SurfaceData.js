@@ -1,7 +1,6 @@
-import React from 'react';
-import { createPortal } from 'react-dom';
 import { MeshBasicMaterial, DoubleSide, CSS3DObject, PlaneBufferGeometry, Mesh, NoBlending, Quaternion } from 'three-full';
 import { Tween, Easing } from 'es6-tween';
+import { refresh } from '../render';
 import './Surface.css';
 
 const material = new MeshBasicMaterial({
@@ -11,7 +10,7 @@ const material = new MeshBasicMaterial({
   blending: NoBlending
 });
 
-export default class Surface {
+export default class SurfaceData {
   constructor(...args) {
     this.initialize(...args);
   }
@@ -48,15 +47,8 @@ export default class Surface {
 
     glScene.add(this.mesh);
     cssScene.add(this.object);
-  }
-
-  // Having a method would mean this === undefined because it's a component, therefor we use a property+fatarrow instead
-  Component = ({ children }) => {
-    return createPortal((
-      <div className="surface">
-        {children}
-      </div>
-    ), this.element);
+    refresh();
+    // if we don't refresh here, there's no guarantee the surface exists in the DOM once we start doing stuff with it!
   }
 
   moveToCamera() {

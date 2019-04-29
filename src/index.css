@@ -21,3 +21,8 @@ code {
 .pointer-events-none {
   pointer-events: none;
 }
+
+#canvas {
+  height: 100%;
+  width: 100%;
+}

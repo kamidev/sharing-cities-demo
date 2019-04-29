@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import { Vector3 } from 'three-full';
 
 // recursively check offset to determine position (in pixels) of the anchor relative to surface.
 // returns null if surface isn't found
 function offset(element) {
-  if (element.offsetParent === null) return null;
+  if (element.offsetParent === null) return { left: 0, top: 0};
   if (element.className === 'surface') return { left: 0, top: 0};
   const offsetParentOffset = offset(element.offsetParent);
   return {
@@ -16,7 +16,7 @@ function offset(element) {
 export default function useGetAnchorData(surface, anchorRef) {
   const [anchorData, setAnchorData] = useState(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // top-left corner has index := 0
     const vertices = surface.geometry.getAttribute('position');
     const i = 0;
@@ -32,7 +32,6 @@ export default function useGetAnchorData(surface, anchorRef) {
     rightDirection.normalize();
     downDirection.normalize();
     outDirection.normalize();
-    
     const anchorOffset = offset(anchorRef.current);
     anchorOffset.left += anchorRef.current.offsetWidth / 2;
     anchorOffset.top += anchorRef.current.offsetHeight / 2;

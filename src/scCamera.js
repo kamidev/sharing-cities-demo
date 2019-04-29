@@ -12,7 +12,6 @@ export default class SCCamera {
     this.camera.rotation.copy(this.defaultRotation);
 
     this.transitionInfo = {
-      running: false,
       targetPosition: null,
       targetRotation: null,
     };
@@ -104,7 +103,7 @@ export default class SCCamera {
     }
 
     // padding is empty space in pixels (on screen) above and below the surface
-    const padding = 100;
+    const padding = 80;
     const fov = _Math.degToRad(this.camera.fov);
     const q = 2 * padding / window.innerHeight;
     const dist = (surface.height / (1 - q)) / (2 * Math.tan(fov / 2));

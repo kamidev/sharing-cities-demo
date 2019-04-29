@@ -40,7 +40,7 @@ export default function withSubSurface(Component) {
   SubSurface.propTypes = {
     cameraView: PropTypes.object,
     setCameraView: PropTypes.func,
-    surface: PropTypes.object.isRequired
+    surface: PropTypes.object
   };
 
   return SubSurface;

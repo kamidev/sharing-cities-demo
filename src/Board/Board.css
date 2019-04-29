@@ -5,9 +5,14 @@
   direction: column;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .board__content {
   display: flex;
   justify-content: center;
+}
+
+.board__content .anchor {
+  margin: 1em;
 }

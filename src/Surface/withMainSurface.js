@@ -22,7 +22,7 @@ export default function withMainSurface(Component) {
   MainSurface.propTypes = {
     cameraView: PropTypes.object,
     setCameraView: PropTypes.func,
-    surface: PropTypes.object.isRequired
+    surface: PropTypes.object
   };
 
   return MainSurface;
