@@ -7,6 +7,7 @@ import './Surface.css';
 
 // NOTE: This is a class component instead of a functional component because we can save an update
 // by creating surfaceData in the constructor. Otherwise it would be an additional update. Also cleaner code.
+// I tried doing it with a ref, but it doesn't work.
 class Surface extends Component {
   constructor(props) {
     super(props);
