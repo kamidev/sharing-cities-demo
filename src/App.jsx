@@ -43,7 +43,7 @@ const floorProps = {
 
 const Embedded = withMainSurface(() => {
   return (
-    <div class="embedded">
+    <div className="embedded">
       <div id="customize-script-container">
       </div>
       <Helmet>
