@@ -1,28 +1,28 @@
-import React, { Component, cloneElement } from 'react';
+import React, { useRef, cloneElement } from 'react';
 import { Vector3, Euler, Scene } from 'three-full';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import SurfaceData from './SurfaceData';
+import SCCamera from '../SCCamera';
 import './Surface.css';
 
-// NOTE: This is a class component instead of a functional component because we can save an update
-// by creating surfaceData in the constructor. Otherwise it would be an additional update. Also cleaner code.
-// I tried doing it with a ref, but it doesn't work.
-class Surface extends Component {
-  constructor(props) {
-    super(props);
-    this.surfaceData = new SurfaceData(props);
+function Surface(props) {
+  // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
+  const surfaceData = useRef(null);
+  function getSurfaceData() {
+    if (surfaceData.current !== null) return surfaceData.current;
+    surfaceData.current = new SurfaceData(props);
+    return surfaceData.current;
   }
 
-  render() {
-    return createPortal((
-      <div className="surface" style={{ fontSize: `${10 / this.surfaceData.scaleFactor}px` }}>
-        {cloneElement(this.props.children, { surface: this.surfaceData })}
-      </div>
-    ), this.surfaceData.element);
-  }
+  return createPortal((
+    <div className="surface" style={{ fontSize: `${10 / getSurfaceData().scaleFactor}px` }}>
+      {cloneElement(props.children, { surface: getSurfaceData() })}
+    </div>
+  ), getSurfaceData().element);
 }
 
+// make sure this matches the args in SurfaceData.js
 Surface.propTypes = {
   width: PropTypes.number.isRequired, 
   height: PropTypes.number.isRequired,
@@ -31,7 +31,7 @@ Surface.propTypes = {
   up: PropTypes.instanceOf(Vector3).isRequired, 
   glScene: PropTypes.instanceOf(Scene).isRequired, 
   cssScene: PropTypes.instanceOf(Scene).isRequired, 
-  toCamera: PropTypes.func.isRequired, 
+  camera: PropTypes.instanceOf(SCCamera).isRequired, 
   isClickable: PropTypes.bool, 
   scaleFactor: PropTypes.number, 
   parent: PropTypes.instanceOf(SurfaceData),

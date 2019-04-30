@@ -1,14 +1,14 @@
 import { Scene, DoubleSide, BoxGeometry, MeshPhongMaterial, Mesh, GLTFLoader, PointLight, WebGLRenderer, CSS3DRenderer } from 'three-full';
 import debounce from 'lodash.debounce';
 import { update } from 'es6-tween';
-import SCCamera from './scCamera.js';
+import SCCamera from './SCCamera.js';
 import roomGLB from './assets/glb/room.glb';
 
 export const scCamera = new SCCamera();
 const glScene = new Scene();
 const bgScene = new Scene();
 const cssScene = new Scene();
-export const surfaceDeps = { glScene, cssScene, toCamera: (surface) => scCamera.toCamera(surface) };
+export const surfaceDeps = { glScene, cssScene, camera: scCamera };
 
 // cube
 const geometry = new BoxGeometry(200, 200, 200);

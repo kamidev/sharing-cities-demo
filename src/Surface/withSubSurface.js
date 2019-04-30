@@ -1,5 +1,6 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useContext, useEffect, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import CameraContext from '../CameraContext';
 
 const isCameraParent = (cameraView, parent) => {
   if (parent === null) return false;
@@ -9,20 +10,22 @@ const isCameraParent = (cameraView, parent) => {
 
 export default function withSubSurface(Component) {
   function SubSurface(props) {
+    const { cameraView } = useContext(CameraContext);
+
     // if surface has a parent and the camera is not on that parent, disable pointer events
     useEffect(() => {
-      if (isCameraParent(props.cameraView, props.surface.parent)) {
+      if (isCameraParent(cameraView, props.surface.parent)) {
         props.surface.object.element.className = "";
       } else {
         props.surface.object.element.className = "pointer-events-none";
       }
-    }, [props.cameraView, props.surface]);
+    }, [cameraView, props.surface]);
 
     // when going back to overview, ensure that the surface goes back to its original position.
     useEffect(() => {
-      if (props.cameraView !== null) return;
+      if (cameraView !== null) return;
       props.surface.moveToOriginal();
-    }, [props.cameraView, props.surface]);
+    }, [cameraView, props.surface]);
 
     return (
       <Fragment>
@@ -30,7 +33,7 @@ export default function withSubSurface(Component) {
           <Component {...props} />
         </div>
         <div
-          className={`surface__overlay ${!isCameraParent(props.cameraView, props.surface.parent) ? 'surface__overlay--hidden' : ''}`}
+          className={`surface__overlay ${!isCameraParent(cameraView, props.surface.parent) ? 'surface__overlay--hidden' : ''}`}
           onClick={() => props.surface.moveToggle()}
         />
       </Fragment>
@@ -38,8 +41,6 @@ export default function withSubSurface(Component) {
   };
 
   SubSurface.propTypes = {
-    cameraView: PropTypes.object,
-    setCameraView: PropTypes.func,
     surface: PropTypes.object
   };
 

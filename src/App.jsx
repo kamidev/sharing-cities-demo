@@ -6,6 +6,7 @@ import Test from './Test.jsx';
 import Board from './Board';
 import { scCamera, surfaceDeps } from './render';
 import withMainSurface from './Surface/withMainSurface';
+import CameraContext from './CameraContext';
 import './App.css';
 
 const leftWallProps = {
@@ -62,18 +63,23 @@ function App(props) {
 
   return (
     <Fragment>
-      <Surface {...leftWallProps}>
-        <Embedded cameraView={cameraView} setCameraView={setCameraView} />
-      </Surface>
-      <Surface {...backWallProps}>
-        <Board cameraView={cameraView} setCameraView={setCameraView} />
-      </Surface>
-      <Surface {...rightWallProps}>
-        <Test cameraView={cameraView} setCameraView={setCameraView} />
-      </Surface>
-      <Surface {...floorProps}>
-        <Test cameraView={cameraView} setCameraView={setCameraView} />
-      </Surface>
+      <CameraContext.Provider value={{
+        cameraView,
+        setCameraView
+      }}>
+        <Surface {...leftWallProps}>
+          <Embedded />
+        </Surface>
+        <Surface {...backWallProps}>
+          <Board />
+        </Surface>
+        <Surface {...rightWallProps}>
+          <Test />
+        </Surface>
+        <Surface {...floorProps}>
+          <Test />
+        </Surface>
+      </CameraContext.Provider>
 
       <div className="app">
         <div className="app__content" />

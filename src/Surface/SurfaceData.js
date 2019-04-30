@@ -15,7 +15,7 @@ export default class SurfaceData {
     this.initialize(...args);
   }
 
-  initialize({ width, height, position, rotation, up, glScene, cssScene, toCamera, isClickable = true, scaleFactor = 1, parent = null }) {
+  initialize({ width, height, position, rotation, up, glScene, cssScene, camera, isClickable = true, scaleFactor = 1, parent = null }) {
     this.width = width;
     this.height = height;
     this.scaleFactor = scaleFactor;
@@ -25,7 +25,7 @@ export default class SurfaceData {
     this.atOriginalPosition = true;
 
     this.parent = parent;
-    this.toCamera = () => toCamera(this);
+    this.camera = camera;
 
     this.element = document.createElement('div');
     this.element.style.width = `${width / scaleFactor}px`;
@@ -52,7 +52,7 @@ export default class SurfaceData {
   }
 
   moveToCamera() {
-    const [position, rotation] = this.toCamera();
+    const [position, rotation] = this.camera.toCamera(this);
     if (this.mesh.position.manhattanDistanceTo(position) < Number.EPSILON) return;
     
     this.moveTransition(position, rotation);

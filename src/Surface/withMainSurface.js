@@ -1,10 +1,13 @@
-import React, { Fragment } from 'react';
+import React, { useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import CameraContext from '../CameraContext';
 
 export default function withMainSurface(Component) {
   function MainSurface(props) {
-    const isCameraHere = props.cameraView === props.surface;
-    const isCameraOverview = props.cameraView === null;
+    const { cameraView, setCameraView } = useContext(CameraContext);
+
+    const isCameraHere = cameraView === props.surface;
+    const isCameraOverview = cameraView === null;
 
     return (
       <Fragment>
@@ -13,15 +16,13 @@ export default function withMainSurface(Component) {
         </div>
         <div
           className={`surface__overlay ${!isCameraOverview ? 'surface__overlay--hidden' : ''}`}
-          onClick={() => props.setCameraView(props.surface)}
+          onClick={() => setCameraView(props.surface)}
         />
       </Fragment>
     );
   };
 
   MainSurface.propTypes = {
-    cameraView: PropTypes.object,
-    setCameraView: PropTypes.func,
     surface: PropTypes.object
   };
 
