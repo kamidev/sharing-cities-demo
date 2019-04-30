@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/sharing-cities-demo/static/css/main.e35b69ed.chunk.css",
-    "main.js": "/sharing-cities-demo/static/js/main.906e2350.chunk.js",
-    "main.js.map": "/sharing-cities-demo/static/js/main.906e2350.chunk.js.map",
+    "main.css": "/sharing-cities-demo/static/css/main.c9d53ad1.chunk.css",
+    "main.js": "/sharing-cities-demo/static/js/main.89b9c536.chunk.js",
+    "main.js.map": "/sharing-cities-demo/static/js/main.89b9c536.chunk.js.map",
     "runtime~main.js": "/sharing-cities-demo/static/js/runtime~main.8ad168a2.js",
     "runtime~main.js.map": "/sharing-cities-demo/static/js/runtime~main.8ad168a2.js.map",
     "static/js/2.b1a962e2.chunk.js": "/sharing-cities-demo/static/js/2.b1a962e2.chunk.js",
     "static/js/2.b1a962e2.chunk.js.map": "/sharing-cities-demo/static/js/2.b1a962e2.chunk.js.map",
     "index.html": "/sharing-cities-demo/index.html",
-    "precache-manifest.55d4412967cee4d939133dc7bda4a6fe.js": "/sharing-cities-demo/precache-manifest.55d4412967cee4d939133dc7bda4a6fe.js",
+    "precache-manifest.69a2d369ab5a4952f602709a3f7cdbf6.js": "/sharing-cities-demo/precache-manifest.69a2d369ab5a4952f602709a3f7cdbf6.js",
     "service-worker.js": "/sharing-cities-demo/service-worker.js",
-    "static/css/main.e35b69ed.chunk.css.map": "/sharing-cities-demo/static/css/main.e35b69ed.chunk.css.map",
+    "static/css/main.c9d53ad1.chunk.css.map": "/sharing-cities-demo/static/css/main.c9d53ad1.chunk.css.map",
     "static/media/room.glb": "/sharing-cities-demo/static/media/room.876c2022.glb"
   }
 }
