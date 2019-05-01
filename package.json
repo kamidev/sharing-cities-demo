@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "babel-plugin-relay": "^2.0.0-rc.2",
     "es6-tween": "^5.4.1",
     "gh-pages": "^2.0.1",
     "lodash.debounce": "^4.0.8",
