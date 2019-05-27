@@ -6,7 +6,7 @@ import useGetAnchorData from './useGetAnchorData';
 
 function AnchoredSurface(props) {
   const anchorRef = useRef(null);
-  const anchorData = useGetAnchorData(props.parent, anchorRef);
+  const anchorData = useGetAnchorData(props.parent, anchorRef, props.causeUpdate);
 
   return (
     <div
@@ -35,7 +35,8 @@ AnchoredSurface.propTypes = {
   width: PropTypes.number.isRequired,
   height: PropTypes.number.isRequired,
   parent: PropTypes.instanceOf(SurfaceData).isRequired,
-  children: PropTypes.element.isRequired
+  children: PropTypes.element.isRequired,
+  causeUpdate: PropTypes.number, // just a number, if it changes, update surface to anchor position
 }
 
 export default AnchoredSurface;

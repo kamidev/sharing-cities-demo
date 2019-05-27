@@ -1,4 +1,4 @@
-import React, { useRef, cloneElement } from 'react';
+import React, { useRef, cloneElement, useEffect, useCallback } from 'react';
 import { Vector3, Euler, Scene } from 'three-full';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
@@ -9,11 +9,28 @@ import './Surface.css';
 function Surface(props) {
   // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
   const surfaceData = useRef(null);
-  function getSurfaceData() {
-    if (surfaceData.current !== null) return surfaceData.current;
-    surfaceData.current = new SurfaceData(props);
-    return surfaceData.current;
-  }
+
+  // this is only a useCallback hook because the linter said to make it so, apparently it can cause unnecessary re-renders in the useEffect hook below otherwise
+  const getSurfaceData = useCallback(
+    () => {
+      if (surfaceData.current !== null) return surfaceData.current;
+      surfaceData.current = new SurfaceData(props);
+      return surfaceData.current;
+    },
+    [props]
+  );
+
+  // if we get new layout props, update the 3d surface
+  useEffect(() => {
+    getSurfaceData().updateLayout(props.position, props.rotation, props.up);
+  }, [getSurfaceData, props.position, props.rotation, props.up])
+
+  // remove surface when destroying the component
+  useEffect(() => {
+    return () => {
+      surfaceData.current.destroy();
+    };
+  }, []);
 
   return createPortal((
     <div className="surface" style={{ fontSize: `${10 / getSurfaceData().scaleFactor}px` }}>

@@ -13,7 +13,7 @@ function offset(element) {
   };
 }
 
-export default function useGetAnchorData(surface, anchorRef) {
+export default function useGetAnchorData(surface, anchorRef, causeUpdate) {
   const [anchorData, setAnchorData] = useState(null);
 
   useLayoutEffect(() => {
@@ -48,7 +48,7 @@ export default function useGetAnchorData(surface, anchorRef) {
       rotation: surface.mesh.rotation.clone(),
       up: surface.mesh.up.clone()
     });
-  }, [surface, anchorRef]);
+  }, [surface, anchorRef, causeUpdate]);
 
   return anchorData;
 }

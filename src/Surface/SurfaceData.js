@@ -21,7 +21,7 @@ export default class SurfaceData {
     this.scaleFactor = scaleFactor;
     this.originalPosition = position.clone();
     this.originalRotation = rotation.clone();
-    this.originalUp = up;
+    this.originalUp = up.clone();
     this.atOriginalPosition = true;
 
     this.parent = parent;
@@ -45,10 +45,29 @@ export default class SurfaceData {
     this.mesh.castShadow = false;
     this.mesh.receiveShadow = true;
 
+    // if we don't refresh here, there's no guarantee the surface exists in the DOM once we start doing stuff with it!
     glScene.add(this.mesh);
     cssScene.add(this.object);
     refresh();
-    // if we don't refresh here, there's no guarantee the surface exists in the DOM once we start doing stuff with it!
+  
+    // put this here (as opposed to its own class member) so we can borrow the scenes.
+    this.destroy = () => {
+      glScene.remove(this.mesh);
+      cssScene.remove(this.object);
+      refresh();
+    };
+  }
+
+  updateLayout(position, rotation, up) {
+    this.originalPosition = position.clone();
+    this.originalRotation = rotation.clone();
+    this.originalUp = up.clone();
+
+    this.object.position.copy(position);
+    this.object.rotation.copy(rotation);
+    this.mesh.position.copy(position);
+    this.mesh.rotation.copy(rotation);
+    this.mesh.up = up;
   }
 
   moveToCamera() {

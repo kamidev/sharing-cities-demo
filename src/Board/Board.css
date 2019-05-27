@@ -8,7 +8,11 @@
   position: relative;
 }
 
-.board__content {
+.board__buttons {
+  text-align: center;
+}
+
+.board__pamphlets {
   display: flex;
   justify-content: center;
 }

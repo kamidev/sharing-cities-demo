@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import AnchoredSurface from '../Surface/AnchoredSurface.jsx';
 import Pamphlet from './Pamphlet';
@@ -7,36 +7,75 @@ import { surfaceDeps } from '../render';
 import './Board.css';
 
 function Board(props) {
+  const [extraSurfaces, setExtraSurfaces] = useState([]);
+
+  const extras = (
+    <Fragment>
+      {extraSurfaces.map((surfaceProps, i) => 
+        <AnchoredSurface key={i} {...surfaceProps} causeUpdate={extraSurfaces.length}>
+          <Pamphlet />
+        </AnchoredSurface>
+      )}
+    </Fragment>
+  );
+
   return (
     <div className="board">
       <div className="board__content">
-        <AnchoredSurface
-          width={100}
-          height={150}
-          parent={props.surface}
-          scaleFactor={0.2}
-          {...surfaceDeps}
-        >
-          <Pamphlet />
-        </AnchoredSurface>
-        <AnchoredSurface
-          width={100}
-          height={150}
-          parent={props.surface}
-          scaleFactor={0.5}
-          {...surfaceDeps}
-        >
-          <Pamphlet />
-        </AnchoredSurface>
-        <AnchoredSurface
-          width={100}
-          height={150}
-          parent={props.surface}
-          scaleFactor={1}
-          {...surfaceDeps}
-        >
-          <Pamphlet />
-        </AnchoredSurface>
+        <div className="board__buttons">
+          <button
+            onClick={() => setExtraSurfaces([...extraSurfaces, {
+              width: 100,
+              height: 150,
+              parent: props.surface,
+              scaleFactor: 0.5,
+              ...surfaceDeps
+            }])}
+          >
+            +
+          </button>
+          <button
+            disabled={extraSurfaces.length === 0}
+            onClick={() => setExtraSurfaces(extraSurfaces.slice(0, -1))}
+          >
+            -
+          </button>
+        </div>
+        <div className="board__pamphlets">
+          <AnchoredSurface
+            width={100}
+            height={150}
+            parent={props.surface}
+            scaleFactor={0.2}
+            causeUpdate={extraSurfaces.length}
+            {...surfaceDeps}
+          >
+            <Pamphlet />
+          </AnchoredSurface>
+          <AnchoredSurface
+            width={100}
+            height={150}
+            parent={props.surface}
+            scaleFactor={0.5}
+            causeUpdate={extraSurfaces.length}
+            {...surfaceDeps}
+          >
+            <Pamphlet />
+          </AnchoredSurface>
+          <AnchoredSurface
+            width={100}
+            height={150}
+            parent={props.surface}
+            scaleFactor={1}
+            causeUpdate={extraSurfaces.length}
+            {...surfaceDeps}
+          >
+            <Pamphlet />
+          </AnchoredSurface>
+
+          {extras}
+
+        </div>
       </div>
     </div>
   );
