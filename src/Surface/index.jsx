@@ -1,5 +1,5 @@
 import React, { useRef, cloneElement, useEffect, useCallback } from 'react';
-import { Vector3, Euler, Scene } from 'three-full';
+import { Vector3, Euler, Scene } from 'three';
 import { createPortal } from 'react-dom';
 import PropTypes from 'prop-types';
 import SurfaceData from './SurfaceData';

@@ -1,4 +1,5 @@
-import { MeshBasicMaterial, DoubleSide, CSS3DObject, PlaneBufferGeometry, Mesh, NoBlending, Quaternion } from 'three-full';
+import { MeshBasicMaterial, DoubleSide, PlaneBufferGeometry, Mesh, NoBlending, Quaternion } from 'three';
+import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 import { Tween, Easing } from 'es6-tween';
 import { refresh } from '../render';
 import './Surface.css';

@@ -1,4 +1,4 @@
-import { PerspectiveCamera, Vector3, Euler, _Math, Quaternion } from 'three-full';
+import { PerspectiveCamera, Vector3, Euler, Math as _Math, Quaternion } from 'three';
 import { Tween, Easing } from 'es6-tween';
 
 export default class SCCamera {

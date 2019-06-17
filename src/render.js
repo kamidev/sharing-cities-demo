@@ -1,4 +1,6 @@
-import { Scene, DoubleSide, BoxGeometry, MeshPhongMaterial, Mesh, GLTFLoader, PointLight, WebGLRenderer, CSS3DRenderer } from 'three-full';
+import { Scene, DoubleSide, BoxGeometry, MeshPhongMaterial, Mesh, PointLight, WebGLRenderer } from 'three';
+import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import debounce from 'lodash.debounce';
 import { update } from 'es6-tween';
 import SCCamera from './SCCamera.js';
@@ -103,6 +105,7 @@ export const refresh = () => {
 
 const animate = (time) => {
   requestAnimationFrame(animate);
+
   cube.rotation.x += 0.01;
   cubeShadow.rotation.x += 0.01;
   cube.rotation.y += 0.01;

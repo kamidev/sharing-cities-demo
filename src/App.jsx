@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { Vector3, Euler } from 'three-full';
+import { Vector3, Euler } from 'three';
 import { Helmet } from 'react-helmet';
 import Surface from './Surface';
 import Test from './Test.jsx';

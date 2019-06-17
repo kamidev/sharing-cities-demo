@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect } from 'react';
-import { Vector3 } from 'three-full';
+import { Vector3 } from 'three';
 
 // recursively check offset to determine position (in pixels) of the anchor relative to surface.
 // returns null if surface isn't found
