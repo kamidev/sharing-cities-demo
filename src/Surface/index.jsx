@@ -33,7 +33,7 @@ function Surface(props) {
   }, []);
 
   return createPortal((
-    <div className="surface" style={{ fontSize: `${10 / getSurfaceData().scaleFactor}px` }}>
+    <div className="surface" style={{ fontSize: `${10 * getSurfaceData().resolutionScale}px` }}>
       {cloneElement(props.children, { surface: getSurfaceData() })}
     </div>
   ), getSurfaceData().element);
@@ -50,7 +50,7 @@ Surface.propTypes = {
   cssScene: PropTypes.instanceOf(Scene).isRequired, 
   camera: PropTypes.instanceOf(SCCamera).isRequired, 
   isClickable: PropTypes.bool, 
-  scaleFactor: PropTypes.number, 
+  resolutionScale: PropTypes.number, 
   parent: PropTypes.instanceOf(SurfaceData),
   children: PropTypes.element.isRequired
 };

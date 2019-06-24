@@ -13,8 +13,8 @@ function AnchoredSurface(props) {
       className="anchor"
       ref={anchorRef}
       style={{
-        width: props.width / props.parent.scaleFactor,
-        height: props.height / props.parent.scaleFactor
+        width: props.width * props.parent.resolutionScale,
+        height: props.height * props.parent.resolutionScale
       }}
     >
       {anchorData &&

@@ -28,7 +28,7 @@ function Board(props) {
               width: 100,
               height: 150,
               parent: props.surface,
-              scaleFactor: 0.5,
+              resolutionScale: 2,
               ...surfaceDeps
             }])}
           >
@@ -46,7 +46,7 @@ function Board(props) {
             width={100}
             height={150}
             parent={props.surface}
-            scaleFactor={0.2}
+            resolutionScale={5}
             causeUpdate={extraSurfaces.length}
             {...surfaceDeps}
           >
@@ -56,7 +56,7 @@ function Board(props) {
             width={100}
             height={150}
             parent={props.surface}
-            scaleFactor={0.5}
+            resolutionScale={2}
             causeUpdate={extraSurfaces.length}
             {...surfaceDeps}
           >
@@ -66,7 +66,7 @@ function Board(props) {
             width={100}
             height={150}
             parent={props.surface}
-            scaleFactor={1}
+            resolutionScale={1}
             causeUpdate={extraSurfaces.length}
             {...surfaceDeps}
           >

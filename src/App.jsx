@@ -12,7 +12,7 @@ import './App.css';
 const leftWallProps = {
   width: 1000,
   height: 1000, 
-  position: new Vector3(500, 0, -500), 
+  position: new Vector3(500, 0, -520), 
   rotation: new Euler(0, -Math.PI / 2, 0), 
   up: new Vector3(0, 1, 0), 
   ...surfaceDeps
@@ -20,7 +20,7 @@ const leftWallProps = {
 const backWallProps = {
   width: 1000, 
   height: 1000, 
-  position: new Vector3(0, 0, 0), 
+  position: new Vector3(0, 0, -20), 
   rotation: new Euler(0, Math.PI, 0), 
   up: new Vector3(0, 1, 0), 
   ...surfaceDeps
@@ -28,7 +28,7 @@ const backWallProps = {
 const rightWallProps = {
   width: 1000, 
   height: 1000, 
-  position: new Vector3(-500, 0, -500), 
+  position: new Vector3(-500, 0, -520), 
   rotation: new Euler(0, Math.PI / 2, 0), 
   up: new Vector3(0, 1, 0), 
   ...surfaceDeps
@@ -36,7 +36,7 @@ const rightWallProps = {
 const floorProps = {
   width: 1000, 
   height: 1000, 
-  position: new Vector3(0, -500, -500), 
+  position: new Vector3(0, -500, -520), 
   rotation: new Euler(Math.PI / 2, Math.PI, 0), 
   up: new Vector3(0, 0, 1), 
   ...surfaceDeps

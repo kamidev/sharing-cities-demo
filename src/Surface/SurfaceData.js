@@ -16,10 +16,10 @@ export default class SurfaceData {
     this.initialize(...args);
   }
 
-  initialize({ width, height, position, rotation, up, glScene, cssScene, camera, isClickable = true, scaleFactor = 1, parent = null }) {
+  initialize({ width, height, position, rotation, up, glScene, cssScene, camera, isClickable = true, resolutionScale = 1, parent = null }) {
     this.width = width;
     this.height = height;
-    this.scaleFactor = scaleFactor;
+    this.resolutionScale = resolutionScale;
     this.originalPosition = position.clone();
     this.originalRotation = rotation.clone();
     this.originalUp = up.clone();
@@ -29,14 +29,14 @@ export default class SurfaceData {
     this.camera = camera;
 
     this.element = document.createElement('div');
-    this.element.style.width = `${width / scaleFactor}px`;
-    this.element.style.height = `${height / scaleFactor}px`;
+    this.element.style.width = `${width * this.resolutionScale}px`;
+    this.element.style.height = `${height * this.resolutionScale}px`;
     this.element.style.opacity = 1;
 
     this.object = new CSS3DObject(this.element);
     this.object.position.copy(position);
     this.object.rotation.copy(rotation);
-    this.object.scale.set(scaleFactor, scaleFactor, scaleFactor);
+    this.object.scale.set(1 / this.resolutionScale, 1 / this.resolutionScale, 1 / this.resolutionScale);
 
     this.geometry = new PlaneBufferGeometry(width, height);
     this.mesh = new Mesh(this.geometry, material);

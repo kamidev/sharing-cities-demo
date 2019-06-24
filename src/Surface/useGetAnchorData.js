@@ -35,8 +35,8 @@ export default function useGetAnchorData(surface, anchorRef, causeUpdate) {
     const anchorOffset = offset(anchorRef.current);
     anchorOffset.left += anchorRef.current.offsetWidth / 2;
     anchorOffset.top += anchorRef.current.offsetHeight / 2;
-    anchorOffset.left *= surface.scaleFactor;
-    anchorOffset.top *= surface.scaleFactor;
+    anchorOffset.left /= surface.resolutionScale;
+    anchorOffset.top /= surface.resolutionScale;
 
     const position = topLeft.clone();
     position.addScaledVector(rightDirection, anchorOffset.left)
