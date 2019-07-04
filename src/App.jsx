@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 import Surface from './Surface';
 import Test from './Test.jsx';
 import Board from './Board';
+import MapTest from './Map';
 import { scCamera, surfaceDeps } from './render';
 import withMainSurface from './Surface/withMainSurface';
 import CameraContext from './CameraContext';
@@ -74,7 +75,7 @@ function App(props) {
           <Board />
         </Surface>
         <Surface {...rightWallProps}>
-          <Test />
+          <MapTest />
         </Surface>
         <Surface {...floorProps}>
           <Test />
