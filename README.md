@@ -2,13 +2,37 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## General demo-functionality using thirdparty libraries
 
-D3.js: https://d3js.org/
+### three: https://threejs.org/
 
-three.js: https://threejs.org/
+3D-animation
 
-react-embed: https://github.com/streamich/react-embed
+### react-embed: https://github.com/streamich/react-embed
 
-react-helmet: https://github.com/nfl/react-helmet
+Embed interative services with full user interface in React, using supplied templates:
+
+    DailyMotion
+    Facebook Video
+    Figma
+    Gfycat
+    Gist
+    Google Maps
+    imgur
+    Instagram
+    JSFiddle
+    MixCloud
+    Replit
+    SoundCloud
+    Twitch Channel
+    Twitch Video
+    Twitter Tweet
+    Vimeo
+    YouTube
+
+Other services can be added by creating your own template.
+
+### react-helmet: https://github.com/nfl/react-helmet
+
+Manipulates HTML header. Can be used to display an external widget.
 
 ## Available Scripts
 
