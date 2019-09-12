@@ -1,5 +1,39 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## General demo-functionality using thirdparty libraries
+
+### three: https://threejs.org/
+
+3D-animation
+
+### react-embed: https://github.com/streamich/react-embed
+
+Embed interative services with full user interface in React, using supplied templates:
+
+    DailyMotion
+    Facebook Video
+    Figma
+    Gfycat
+    Gist
+    Google Maps
+    imgur
+    Instagram
+    JSFiddle
+    MixCloud
+    Replit
+    SoundCloud
+    Twitch Channel
+    Twitch Video
+    Twitter Tweet
+    Vimeo
+    YouTube
+
+Other services can be added by creating your own template.
+
+### react-helmet: https://github.com/nfl/react-helmet
+
+Manipulates HTML header. Can be used to display an external widget.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -16,10 +50,27 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
+### ´npm run e2e"
+
+Currently configured to run all [Nightwatch tests](https://nightwatchjs.org/) in folder "tests".
+
+Nightwatch performs functional tests using actual browsers. Right now, it is setup for Chrome.
+Additional browsers can be configured and tests can also run headless.
+
+NOTE! To test React apps on localhost, you must first start the application in a separate terminal.
+
+Functional tests are useful for different things, including:
+
+- very simple sanity checks of user interface and basic functionality
+- checking that calls to external sites work as expected
+
+Currently, only two rudimentary sample tests are implemented.
+
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
+Launches the default React test runner in the interactive watch mode.<br>
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Note! For this application, default tests currently doesn't work.
 
 ### `npm run build`
 

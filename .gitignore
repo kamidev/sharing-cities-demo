@@ -8,6 +8,10 @@
 # testing
 /coverage
 
+# e2e tests
+/tests_output
+chromedriver.log
+
 # production
 /build
 
