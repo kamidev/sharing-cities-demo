@@ -12,6 +12,19 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
+### Simple functional tests using Nightwatch ´npm run e2e"
+
+By default, this runs all [Nightwatch tests](https://nightwatchjs.org/) in folder "tests".
+NOTE! To test React apps on localhost, you must first start them in a separate terminal.
+
+Nightwatch performs functional tests using actual browsers. Right now, it is setup for Chrome.
+This kind of tests is useful for at least two different things:
+
+- Very simple sanity checks of the React UI
+- checking that calls to external sites work as expected
+
+Currently, only two very rudimentary sample tests are implemented.
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.<br>
