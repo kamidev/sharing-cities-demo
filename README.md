@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+### `npm run test:e2e`
+
+TODO - Add feature branch for this...
+
 ### `npm start`
 
 Runs the app in the development mode.<br>
