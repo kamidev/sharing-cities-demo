@@ -4,9 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-### `npm run test:e2e`
+### `npm e2e-test`
 
-TODO - Add feature branch for this...
+Start React application in one terminal. Then run this command in another to display e2e tests using Nightwatch and Chrome.
 
 ### `npm start`
 
