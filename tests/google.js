@@ -1,5 +1,7 @@
 module.exports = {
-  "Google search 'Nightwatch'": function(browser) {
+  "Google search and check for expected result on front page": function(
+    browser
+  ) {
     browser
       .windowMaximize()
       .url("https://www.google.com")

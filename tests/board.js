@@ -1,5 +1,7 @@
 module.exports = {
-  "Display portal main screen": function(browser) {
+  "Check that SharingCities portal is visible and has expected parts": function(
+    browser
+  ) {
     browser
       .windowMaximize()
       .url(browser.launchUrl)
