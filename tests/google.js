@@ -8,7 +8,7 @@ module.exports = {
       .waitForElementVisible("input[name=btnK]", 1000)
       .click("input[name=btnK]")
       .pause(1000)
-      .assert.containsText("#main", "Night Watch")
+      .assert.containsText("#main", "Nightwatch.js")
       .end();
   }
 };
