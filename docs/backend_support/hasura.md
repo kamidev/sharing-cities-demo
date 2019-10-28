@@ -1,6 +1,6 @@
-# Hasura GraphQL Engine
+## Hasura GraphQL Engine
 
-## Official docs
+### Official docs
 
 [![Docs](https://img.shields.io/badge/docs-v1.0-brightgreen.svg?style=flat)](https://docs.hasura.io)
 [![CircleCI](https://circleci.com/gh/hasura/graphql-engine.svg?style=shield)](https://circleci.com/gh/hasura/graphql-engine)
@@ -23,17 +23,17 @@ Read more at [hasura.io](https://hasura.io) and the [docs](https://docs.hasura.i
 
 ![Hasura GraphQL Engine Realtime Demo](assets/realtime.gif)
 
-## Motivation for SharingCities
+### Motivation for SharingCities
 
 Add new datasource and construct relevant queries in a faster, more accesible way. Use online GraphQL editor to let frontend and backend developers see data the same way.
 
-## Install your own server
+### Install your own server
 
 There is currently an experimental server installed following [this guide](https://docs.hasura.io/1.0/graphql/manual/guides/deployment/digital-ocean-one-click.html#hasura-graphql-engine-one-click-app-on-digitalocean-marketplace). There are many other ways to deploy Hasura, so pick one that works for you.
 
 Note that the test server is password protected, in order to use it you must ask the developers of this repository for access. We recommend installing your own to experiment instead, it's not a very complicated procedure.
 
-## Interesting additional functionality
+### Interesting additional functionality
 
 [Realtime charts made easy with GraphQL and ChartJS](https://blog.hasura.io/graphql2chartjs-realtime-charts-made-easy-with-graphql-and-chartjs/)
 
