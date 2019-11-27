@@ -11,11 +11,19 @@ import withMainSurface from "./Surface/withMainSurface";
 import CameraContext from "./CameraContext";
 import "./App.css";
 
-const leftWallProps = {
+const farLeftWallProps = {
   width: 1000,
   height: 1000,
-  position: new Vector3(500, 0, -520),
-  rotation: new Euler(0, -Math.PI / 2, 0),
+  position: new Vector3(1620, 0, -940),
+  rotation: new Euler(0, -2 * Math.PI / 3, 0),
+  up: new Vector3(0, 1, 0),
+  ...surfaceDeps
+};
+const middleLeftWallProps = {
+  width: 1000,
+  height: 1000,
+  position: new Vector3(935, 0, -265),
+  rotation: new Euler(0, -5 * Math.PI / 6, 0),
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
@@ -27,20 +35,20 @@ const backWallProps = {
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
-const rightWallProps = {
+const middleRightWallProps = {
   width: 1000,
   height: 1000,
-  position: new Vector3(-500, 0, -520),
-  rotation: new Euler(0, Math.PI / 2, 0),
+  position: new Vector3(-930, 0, -270),
+  rotation: new Euler(0, 5 * Math.PI / 6, 0),
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
-const floorProps = {
+const farRightWallProps = {
   width: 1000,
   height: 1000,
-  position: new Vector3(0, -500, -520),
-  rotation: new Euler(Math.PI / 2, Math.PI, 0),
-  up: new Vector3(0, 0, 1),
+  position: new Vector3(-1620, 0, -940),
+  rotation: new Euler(0, 2 * Math.PI / 3, 0),
+  up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
 
@@ -68,16 +76,19 @@ function App(props) {
           setCameraView
         }}
       >
-        <Surface {...leftWallProps}>
+        <Surface {...farLeftWallProps}>
+          <Test />
+        </Surface>
+        <Surface {...middleLeftWallProps}>
           <Embedded />
         </Surface>
         <Surface {...backWallProps}>
           <Board />
         </Surface>
-        <Surface {...rightWallProps}>
+        <Surface {...middleRightWallProps}>
           <MapTest />
         </Surface>
-        <Surface {...floorProps}>
+        <Surface {...farRightWallProps}>
           <Test />
         </Surface>
       </CameraContext.Provider>

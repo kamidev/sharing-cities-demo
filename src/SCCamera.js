@@ -3,9 +3,9 @@ import { Tween, Easing } from 'es6-tween';
 
 export default class SCCamera {
   constructor() {
-    this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 5000);
+    this.camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
 
-    this.defaultPosition = new Vector3(0, 0, -1800);
+    this.defaultPosition = new Vector3(0, 0, -3000);
     this.defaultRotation = new Euler(0, Math.PI, 0);
 
     this.camera.position.copy(this.defaultPosition);

@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import debounce from 'lodash.debounce';
 import { update } from 'es6-tween';
 import SCCamera from './SCCamera.js';
-import roomGLB from './assets/glb/room.glb';
+import roomGLB from './assets/glb/room2.glb';
 
 export const scCamera = new SCCamera();
 const glScene = new Scene();
@@ -36,11 +36,21 @@ cubeShadow.position.copy(cube.position);
 bgScene.add(cubeShadow);
 
 const loader = new GLTFLoader();
-loader.load(roomGLB, function (gltf) {
+/*loader.load(roomGLB, function (gltf) {
   gltf.scene.scale.multiplyScalar(100);
   gltf.scene.rotation.y = Math.PI;
   gltf.scene.position.y = -500;
   gltf.scene.position.z = -500;
+  gltf.scene.children[0].receiveShadow = true;
+  bgScene.add(gltf.scene);
+});*/
+
+loader.load(roomGLB, function (gltf) {
+  gltf.scene.scale.multiplyScalar(100);
+  gltf.scene.rotation.y = Math.PI;
+  gltf.scene.position.y = -550;
+  gltf.scene.position.z = -500;
+  gltf.scene.position.x = -2280;
   gltf.scene.children[0].receiveShadow = true;
   bgScene.add(gltf.scene);
 });
