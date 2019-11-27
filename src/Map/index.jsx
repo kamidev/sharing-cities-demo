@@ -1,70 +1,67 @@
 import React, { useState } from 'react';
-import { StaticMap, NavigationControl } from 'react-map-gl';
-import DeckGL from '@deck.gl/react';
-import { ScatterplotLayer } from '@deck.gl/layers';
-import { EAQI_COLOR_RANGE, EAQI_PM10_LABELS, pm10ColorScale } from './scales';
-import Legend from './Legend';
+import MapWrapper from './MapWrapper';
 import withMainSurface from '../Surface/withMainSurface';
+import usePM10Layer from './layers/usePM10Layer';
+import usePM2_5Layer from './layers/usePM2_5Layer';
+import LayerSelector from './LayerSelector';
 import processLuftData from './processLuftData';
-import tempData from './tempData.json';
+import { DATA_SOURCES, useSubscribeToDataSource } from './dataSources';
+
 import 'mapbox-gl/dist/mapbox-gl.css';
+import './Map.css';
 
 // tempData.json was retrieved from the following url:
 // http://api.luftdaten.info/v1/filter/area=59.305477,18.105203,0.50
-// the goal eventually (once the map layers work) is to retrieve it continuously from the API, since it's real time data. 
-const data = processLuftData(tempData);
-console.log(data);
+// the goal eventually (once the map layers work) is to retrieve it continuously from the API, since it's real time data.
+import tempData from './tempData.json';
+
+// layers must be custom hooks that take four arguments (data, visible, hoverData, setHoverData)
+// and that must return [layer, tooltip, legend]
+const layers = {
+  pm10: {
+    hook: usePM10Layer,
+    dataSource: DATA_SOURCES.LUFT_DATA
+  },
+  pm2_5: {
+    hook: usePM2_5Layer,
+    dataSource: DATA_SOURCES.TEST // DATA_SOURCES.LUFT_DATA
+  }
+}
+
+let layerResults = {};
 
 function Map() {
-  const [viewport, setViewport] = useState({
-    latitude: 59.305477, 
-    longitude: 18.105203,
-    zoom: 15,
-    bearing: 0,
-    pitch: 0,
-    width: 1000,
-    height: 1000
+  const [hoverData, setHoverData] = useState(null);
+  const [pickedLayer, setPickedLayer] = useState('pm10');
+
+  // temporarily this is just an array of temp luftdata, but once functional it should be
+  // an object with a prop for each data source.
+  const [data, setData] = useState(processLuftData(tempData));
+
+  // this hook will update the data state used by the picked layer by fetching at regular intervals
+  useSubscribeToDataSource(layers[pickedLayer].dataSource, setData);
+
+  // create an array of {layer, tooltip, legend} using the layerHooks
+  Object.keys(layers).forEach(layer => {
+    layerResults[layer] = layers[layer].hook(data, pickedLayer === layer, hoverData, setHoverData);
   });
 
-  const layers = [
-    new ScatterplotLayer({
-      id: 'particles-layer',
-      data,
-      lineWidthUnits: 'pixels',
-      getRadius: 30,
-      getFillColor: d => pm10ColorScale(d.average_measurements.P1),
-      getLineColor: [0, 0, 0, 255],
-      getLineWidth: 10
-    })
-  ];
+  const layerSelector = (
+    <LayerSelector
+      layers={Object.keys(layers)}
+      pickedLayer={pickedLayer}
+      setPickedLayer={setPickedLayer}
+    />
+  );
 
   return (
-    <div>
-      <DeckGL
-        viewState={viewport}
-        onViewStateChange={({ viewState }) => setViewport(viewState)}
-        layers={layers}
-        controller={true}
-      >
-        <StaticMap
-          mapStyle='http://localhost:8080/styles/klokantech-basic/style.json' // obviously temporary, running "TileServer GL" locally, mapquest billing makes me nervous
-        >
-          <div className='mapboxgl-ctrl-bottom-right'>
-            <NavigationControl 
-              onViewportChange={(viewState) => setViewport(viewState)}
-            />
-          </div>
-
-          <div className='mapboxgl-ctrl-bottom-left'>
-            <Legend
-              title="PM10"
-              colors={EAQI_COLOR_RANGE}
-              labels={EAQI_PM10_LABELS}
-            />
-          </div>
-        </StaticMap>
-      </DeckGL>
-    </div>
+    <MapWrapper
+      hoverData={hoverData}
+      layers={Object.keys(layerResults).map(layer => layerResults[layer].layer)}
+      tooltip={layerResults[pickedLayer].tooltip}
+      legend={layerResults[pickedLayer].legend}
+      layerSelector={layerSelector}
+    />
   );
 };
 
