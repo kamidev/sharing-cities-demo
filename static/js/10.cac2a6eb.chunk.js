@@ -1,0 +1,2 @@
+(this["webpackJsonpsharing-cities-demo"]=this["webpackJsonpsharing-cities-demo"]||[]).push([[10],{313:function(e,r,i){"use strict";i.r(r);var t=i(3);r.default=function(e){var r=e.id;return(0,e.renderWrap)(t.createElement("iframe",{src:"https://gfycat.com/ifr/"+r,width:"100%",height:"500px",frameBorder:"0",scrolling:"no",allowFullScreen:!0}))}}}]);
+//# sourceMappingURL=10.cac2a6eb.chunk.js.map
