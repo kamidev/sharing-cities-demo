@@ -14,7 +14,7 @@ const margin = 10;
 // TODO: unit, fix margins and numbers and shit, right now it's a bit too hardcoded
 class Legend extends BaseControl {
   _render() {
-    const { title, unit, colors, labels } = this.props;
+    const { title, colors, labels } = this.props;
 
     if (colors.length !== labels.length - 1)
       throw new Error("With N colors, there must be N+1 labels.");

@@ -1,5 +1,7 @@
 import { scaleThreshold } from 'd3';
 
+// TODO: maybe this can be a bit nicer looking by reusing the "good", "fair" etc scales for all the crap?
+
 // http://airindex.eea.europa.eu/
 export const EAQI_COLORS = {
   good: [80, 240, 230, 255],
@@ -20,8 +22,8 @@ export const EAQI_COLOR_RANGE = [
 export const EAQI_PM2_5_DOMAIN = [10, 20, 25, 50];
 export const EAQI_PM10_DOMAIN = [20, 35, 50, 100];
 
-export const EAQI_PM2_5_LABELS = [0, 10, 20, 25, 50, '∞'];
-export const EAQI_PM10_LABELS = [0, 20, 35, 50, 100, '∞'];
+export const EAQI_PM2_5_LABELS = [0, ...EAQI_PM2_5_DOMAIN, '∞'];
+export const EAQI_PM10_LABELS = [0, ...EAQI_PM10_DOMAIN, '∞'];
 
 export const pm2_5ColorScale = scaleThreshold()
     .domain(EAQI_PM2_5_DOMAIN)
