@@ -1,2 +1,0 @@
-(this["webpackJsonpsharing-cities-demo"]=this["webpackJsonpsharing-cities-demo"]||[]).push([[13],{310:function(e,r,l){"use strict";l.r(r);var o=l(3);r.default=function(e){var r=e.id;return(0,e.renderWrap)(o.createElement("iframe",{height:"700px",width:"100%",frameBorder:"no",allowFullScreen:!0,src:"https://repl.it/"+r+"?lite=true",scrolling:"no",sandbox:"allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"}))}}}]);
-//# sourceMappingURL=13.1626800a.chunk.js.map
