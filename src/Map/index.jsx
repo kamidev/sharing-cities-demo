@@ -12,7 +12,7 @@ import './Map.css';
 
 // tempData.json was retrieved from the following url:
 // http://api.luftdaten.info/v1/filter/area=59.305477,18.105203,0.50
-// the goal eventually (once the map layers work) is to retrieve it continuously from the API, since it's real time data.
+// the goal eventually is to retrieve it continuously from the API, since it's real time data.
 import tempData from './tempData.json';
 
 // layers must be custom hooks that take four arguments (data, visible, hoverData, setHoverData)
@@ -24,7 +24,7 @@ const layers = {
   },
   pm2_5: {
     hook: usePM2_5Layer,
-    dataSource: DATA_SOURCES.TEST // DATA_SOURCES.LUFT_DATA
+    dataSource: DATA_SOURCES.LUFT_DATA
   }
 }
 
@@ -36,14 +36,17 @@ function Map() {
 
   // temporarily this is just an array of temp luftdata, but once functional it should be
   // an object with a prop for each data source.
-  const [data, setData] = useState(processLuftData(tempData));
+  const [data, setData] = useState({
+    [DATA_SOURCES.LUFT_DATA]: processLuftData(tempData),
+  });
 
   // this hook will update the data state used by the picked layer by fetching at regular intervals
-  useSubscribeToDataSource(layers[pickedLayer].dataSource, setData);
+  // NOTE: This isn't actually used right now because of CORS issues, it was never finished.
+  //useSubscribeToDataSource(layers[pickedLayer].dataSource, setData);
 
   // create an array of {layer, tooltip, legend} using the layerHooks
   Object.keys(layers).forEach(layer => {
-    layerResults[layer] = layers[layer].hook(data, pickedLayer === layer, hoverData, setHoverData);
+    layerResults[layer] = layers[layer].hook(data[layers[layer].dataSource], pickedLayer === layer, hoverData, setHoverData);
   });
 
   const layerSelector = (
