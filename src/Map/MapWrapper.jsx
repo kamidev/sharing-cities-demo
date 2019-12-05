@@ -14,6 +14,13 @@ function MapWrapper({ hoverData, layers, tooltip, legend, layerSelector }) {
     height: 1000
   });
 
+  // NOTE: add a file .env in the root directory with the line
+  // REACT_APP_MAPBOX_API_KEY=
+  // followed with the api key for this to work!
+  // ALSO NOTE: This isn't actually 100% secure, see, for more security create a key with url restrictions:
+  // https://create-react-app.dev/docs/adding-custom-environment-variables/
+  const mapboxApiKey = process.env.REACT_APP_MAPBOX_API_KEY;
+
   return (
     <div className="map">
       <DeckGL
@@ -24,7 +31,8 @@ function MapWrapper({ hoverData, layers, tooltip, legend, layerSelector }) {
         getCursor={({isDragging}) => isDragging ? 'move' : (hoverData ? 'pointer' : 'auto')}
       >
         <StaticMap
-          mapStyle='http://localhost:8080/styles/klokantech-basic/style.json' // obviously temporary, running "TileServer GL" locally, mapquest billing makes me nervous
+          mapboxApiAccessToken={mapboxApiKey}
+          //mapStyle='http://localhost:8080/styles/klokantech-basic/style.json' // obviously temporary, running "TileServer GL" locally, mapquest billing makes me nervous
         >
           <div className="map__controls">
             {hoverData && (
