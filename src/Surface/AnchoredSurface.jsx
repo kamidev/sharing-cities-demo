@@ -4,6 +4,12 @@ import Surface from './';
 import SurfaceData from './SurfaceData';
 import useGetAnchorData from './useGetAnchorData';
 
+/**
+ * This component creates a type of surface which is "anchored" to another surface.
+ *
+ * It could be seen as a "child surface". The point of this surface is to allow
+ * for precise positioning of smaller surfaces inside of other surfaces.
+ */
 function AnchoredSurface(props) {
   const anchorRef = useRef(null);
   const anchorData = useGetAnchorData(props.parent, anchorRef, props.causeUpdate);

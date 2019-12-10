@@ -11,7 +11,11 @@ const width = 250;
 const height = 30;
 const margin = 10;
 
-// TODO: unit, fix margins and numbers and shit, right now it's a bit too hardcoded
+/** 
+ * This class defines a UI element for the map, containing the legend for the active layer.
+ *
+ * TODO: unit, fix margins and numbers and labels, right now it's a bit too hardcoded
+ */
 class Legend extends BaseControl {
   _render() {
     const { title, colors, labels } = this.props;

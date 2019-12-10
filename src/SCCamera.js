@@ -1,6 +1,10 @@
 import { PerspectiveCamera, Vector3, Euler, Math as _Math, Quaternion } from 'three';
 import { Tween, Easing } from 'es6-tween';
 
+/** 
+ * This class contains all code pertaining to camera functionality,
+ * specifically camera movement (right now).
+ */
 export default class SCCamera {
   constructor() {
     this.camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
@@ -20,10 +24,16 @@ export default class SCCamera {
     this.rotationTween = null;
   }
 
+  /**
+   * Move camera to overview (default) position
+   */
   goToOverview() {
     this.transition(this.defaultPosition, this.defaultRotation);
   }
 
+  /** 
+   * Move camera to look at a given surface.
+   */
   goToSurface(surface) {
     if (surface === null) {
       this.goToOverview();
@@ -59,6 +69,11 @@ export default class SCCamera {
     this.transition(targetPosition, targetRotation)
   }
 
+  /** 
+   * Used for animated the camera to a given target position and target rotation.
+   *
+   * NOTE: When using this, make sure that the cameras up vector is correct or it might look weird!
+   */
   transition(targetPosition, targetRotation) {
     this.transitionInfo = {
       targetPosition,
@@ -87,12 +102,22 @@ export default class SCCamera {
     }).start();
   }
 
+  /** 
+   * Returns true if camera is currently moving
+   */
   isTransitionRunning() {
     if (this.positionTween === null || this.rotationTween === null) return false;
     return this.positionTween.isPlaying() || this.rotationTween.isPlaying();
   }
 
-  // returns [position, rotation]
+  /**
+   * Helper function which tells a surface where it needs to move
+   * to be positioned and oriented directly in front of the camera.
+   *
+   * See Surface/SurfaceData.js.
+   *
+   * Returns [position, rotation]
+   */
   toCamera(surface) {
     const cameraOriginalPosition = this.camera.position.clone();
     const cameraOriginalRotation = this.camera.rotation.clone();

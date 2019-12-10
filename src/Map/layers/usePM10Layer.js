@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScatterplotLayer } from '@deck.gl/layers';
-import axios from 'axios';
 import { EAQI_COLOR_RANGE, EAQI_PM10_LABELS, pm10ColorScale } from '../scales';
 import Legend from '../Legend';
-
-// hook that returns 3 things, (i) layer, (ii) tooltip jsx, (iii) legend jsx
 
 const legend = (
   <Legend
@@ -14,6 +11,12 @@ const legend = (
   />
 );
 
+/**
+ * This is a react hook which returns 3 things (in an array [(1), (2), (3)]):
+ *   (1) The layer object (as defined by deck.gl) itself
+ *   (2) The JSX tag for the tooltip that will be shown when hovering over layer objects
+ *   (3) The JSX tag for the legend that will be shown when the layer is active.
+ */
 function usePM10Layer(data, visible, hoverData, setHoverData) {
   const [layer, setLayer] = useState(null);
   const [tooltip, setTooltip] = useState(null);

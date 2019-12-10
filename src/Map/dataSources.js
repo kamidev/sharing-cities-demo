@@ -2,13 +2,17 @@ import { useRef, useEffect } from 'react';
 
 import axios from 'axios';
 
-// TODO, better filename? Data?
-// NOTE: this file makes some assumptions about API:s that are used, 
+// NOTE: This file is currently not being used as part of the code,
+// and it's also probably completely useless, since there are CORS issues with luftdaten.info,
+// so it doesn't work, there probably needs to be a proxy server for real-time luftdata to avoid CORS errors.
+// 
+// The idea behind this file was to have a generalized way to fetch real-time data at a given interval,
+// it would work on luftdata, were it not for CORS restrictions on the luftdata API.
+// 
+// ALSO NOTE: this file makes some assumptions about API:s that are used, 
 // and will probably need to be updated to accomodate any changes in API:s used.
 // e.g., polling rate restrictions.
-// 
-// NOTE: THis file is also probably completely useless, since you run into CORS issues with luftdaten.info,
-// so it doesn't work anyway, which is why it isn't used at the moment.
+
 
 // temporary for testing
 function timeout(ms) {
@@ -39,6 +43,7 @@ const fetch_data = {
   }
 };
 
+/** Fetch data and update parent state */
 async function fetchAndUpdate(dataSource, lastUpdateRef, setData) {
   const data = await fetch_data[dataSource]();
   lastUpdateRef.current[dataSource] = Date.now();
@@ -52,9 +57,16 @@ function timeSinceLastUpdate(dataSource, lastUpdateRef) {
   return Date.now() - lastUpdateRef.current[dataSource];
 }
 
-// A function that has a callDelay and an intervalDelay, the first call is done after callDelay ms, after which the interval starts.
-// This function must also be cancellable, if we're waiting for the call, cancel that, if the interval is running, cancel that.
-// This function returns a promise where the value is function that when called, cancels any running timers.
+/**
+ * This function has a timeout delay and an interval delay,
+ * the first call is done after timeoutDelay ms, after which the interval starts.
+ *
+ * This function must also be cancellable, if we're waiting for the call,
+ * cancel that, if the interval is running, cancel that.
+ *
+ * This function returns a promise where the value is function that when called,
+ * cancels any running timers.
+ */
 async function sub(dataSource, lastUpdateRef, delay, setData) {
   const timeoutDelay = Math.max(0, delay - timeSinceLastUpdate(dataSource, lastUpdateRef));
   let intervalRunning = false;

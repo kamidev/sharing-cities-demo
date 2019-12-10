@@ -6,6 +6,13 @@ import { update } from 'es6-tween';
 import SCCamera from './SCCamera.js';
 import roomGLB from './assets/glb/room2.glb';
 
+/** 
+ * This file contains the code to set up the rendering context and to do things outside
+ * of the scope of the react stuff.
+ * 
+ * Any straight up WebGL stuff should probably go here.
+ */
+
 export const scCamera = new SCCamera();
 const glScene = new Scene();
 const bgScene = new Scene();
@@ -22,6 +29,8 @@ const material = new MeshPhongMaterial({
   flatShading: false,
   shininess: 30
 });
+
+// draw a little cube (just for testing)
 const cube = new Mesh(geometry, material);
 cube.position.z = -250;
 cube.position.x = 250;
@@ -35,6 +44,8 @@ cubeShadow.material.opacity = 0;
 cubeShadow.position.copy(cube.position);
 bgScene.add(cubeShadow);
 
+// room with 3 walls
+// NOTE: all the surfaces defined in App.jsx must be changed when using this
 const loader = new GLTFLoader();
 /*loader.load(roomGLB, function (gltf) {
   gltf.scene.scale.multiplyScalar(100);
@@ -45,6 +56,7 @@ const loader = new GLTFLoader();
   bgScene.add(gltf.scene);
 });*/
 
+// room with 5 walls
 loader.load(roomGLB, function (gltf) {
   gltf.scene.scale.multiplyScalar(100);
   gltf.scene.rotation.y = Math.PI;
@@ -70,7 +82,7 @@ bgScene.add(new PointLight().copy(pointLight));
 //glScene.add( pointLightHelper );
 
 
-
+// background WebGL renderer
 const bgRenderer = new WebGLRenderer({ alpha: true });
 bgRenderer.setClearColor(0x000000, 0);
 bgRenderer.setPixelRatio(window.devicePixelRatio);
@@ -81,6 +93,7 @@ bgRenderer.domElement.style.left = 0;
 bgRenderer.shadowMap.enabled = true;
 document.getElementById('canvas').appendChild(bgRenderer.domElement);
 
+// css renderer in the middle
 const cssRenderer = new CSS3DRenderer();
 cssRenderer.setSize(window.innerWidth, window.innerHeight);
 cssRenderer.domElement.style.position = 'absolute';
@@ -88,6 +101,7 @@ cssRenderer.domElement.style.top = 0;
 cssRenderer.domElement.style.left = 0;
 document.getElementById('canvas').appendChild(cssRenderer.domElement);
 
+// foreground WebGL renderer
 const glRenderer = new WebGLRenderer({ alpha: true });
 glRenderer.setClearColor(0x000000, 0);
 glRenderer.setPixelRatio(window.devicePixelRatio);
@@ -98,6 +112,7 @@ glRenderer.domElement.style.left = 0;
 glRenderer.domElement.style.pointerEvents = 'none';
 document.getElementById('canvas').appendChild(glRenderer.domElement);
 
+// adapt canvas and camera to window size
 const onResize = debounce(() => {
   scCamera.camera.aspect = window.innerWidth / window.innerHeight;
   scCamera.camera.updateProjectionMatrix();
@@ -113,6 +128,7 @@ export const refresh = () => {
   glRenderer.render(glScene, scCamera.camera);
 };
 
+// rendering loop
 const animate = (time) => {
   requestAnimationFrame(animate);
 

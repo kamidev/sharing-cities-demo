@@ -6,6 +6,10 @@ import withMainSurface from '../Surface/withMainSurface';
 import { surfaceDeps } from '../render';
 import './Board.css';
 
+/**
+ * This component is an example of a surface containing anchored surfaces,
+ * and how they can be added both statically and dynamically
+ */
 function Board(props) {
   const [extraSurfaces, setExtraSurfaces] = useState([]);
 

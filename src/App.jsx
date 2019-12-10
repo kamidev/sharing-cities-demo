@@ -11,6 +11,7 @@ import withMainSurface from "./Surface/withMainSurface";
 import CameraContext from "./CameraContext";
 import "./App.css";
 
+// define props for all the main surfaces here, easier that way!
 const farLeftWallProps = {
   width: 1000,
   height: 1000,

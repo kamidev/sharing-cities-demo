@@ -2,6 +2,12 @@ import React, { useContext, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import CameraContext from '../CameraContext';
 
+/**
+ * The HOC component will apply a behaviour to a surface so that when it is clicked,
+ * the camera will move towards the surface.
+ *
+ * Use when defining Surfaces, i.e. export default withMainSurface(TestSurface);
+ */
 export default function withMainSurface(Component) {
   function MainSurface(props) {
     const { cameraView, setCameraView } = useContext(CameraContext);

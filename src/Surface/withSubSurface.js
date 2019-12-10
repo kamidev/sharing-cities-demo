@@ -8,6 +8,12 @@ const isCameraParent = (cameraView, parent) => {
   return isCameraParent(cameraView, parent.parent);
 };
 
+/**
+ * The HOC component will apply a behaviour to a surface so that when it is clicked,
+ * the surface will move towards the camera.
+ *
+ * Use when defining Surfaces, i.e. export default withSubSurface(TestSurface);
+ */
 export default function withSubSurface(Component) {
   function SubSurface(props) {
     const { cameraView } = useContext(CameraContext);

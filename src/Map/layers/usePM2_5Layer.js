@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { IconLayer } from '@deck.gl/layers';
-import axios from 'axios';
 import { EAQI_COLOR_RANGE, EAQI_PM2_5_LABELS, pm2_5ColorScale } from '../scales';
-import processLuftData from '../processLuftData';
 import Legend from '../Legend';
 import icons from '../../assets/img/icon-atlas.png';
 
-import tempData from '../tempData.json';
-
+// This layer uses an icon instead of a circle shape,
+// the ICON_MAPPING object defines the boundary for the icon used in the given spritesheet (icon-atlas.png)
 const ICON_MAPPING = {
   marker: {x: 0, y: 0, width: 128, height: 128, mask: true}
 };
@@ -20,6 +18,12 @@ const legend = (
   />
 );
 
+/**
+ * This is a react hook which returns 3 things (in an array [(1), (2), (3)]):
+ *   (1) The layer object (as defined by deck.gl) itself
+ *   (2) The JSX tag for the tooltip that will be shown when hovering over layer objects
+ *   (3) The JSX tag for the legend that will be shown when the layer is active.
+ */
 function usePM2_5Layer(data, visible, hoverData, setHoverData) {
   const [layer, setLayer] = useState(null);
   const [tooltip, setTooltip] = useState(null);

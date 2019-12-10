@@ -6,6 +6,12 @@ import SurfaceData from './SurfaceData';
 import SCCamera from '../SCCamera';
 import './Surface.css';
 
+/**
+ * This component creates a surface. Basically a wall in the room metaphor.
+ *
+ * A surface is where you would put your regular web (react) content.
+ * Works like a regular div container, only with a position in the 3D space.
+ */
 function Surface(props) {
   // https://reactjs.org/docs/hooks-faq.html#how-to-create-expensive-objects-lazily
   const surfaceData = useRef(null);

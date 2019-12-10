@@ -1,5 +1,10 @@
 import { scaleThreshold } from 'd3';
 
+/**
+ * This file contains constants pertaining to data scales,
+ * for now it's just luftdata, which is used to determine color and legend.
+ */
+
 // TODO: maybe this can be a bit nicer looking by reusing the "good", "fair" etc scales for all the crap?
 
 // http://airindex.eea.europa.eu/

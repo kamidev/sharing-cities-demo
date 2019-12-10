@@ -3,6 +3,14 @@ import { StaticMap, NavigationControl, Popup } from 'react-map-gl';
 import DeckGL from '@deck.gl/react';
 import PropTypes from 'prop-types';
 
+/** 
+ * Component to render all the deck.gl map and react-map-gl stuff
+ *
+ * The purpose of this MapWrapper is to enclose the state that is specific to the map,
+ * i.e. the viewport, which will be updatet A LOT. The Map itself has other state
+ * and logic which doesn't need to update as often, which is why the wrapper makes sense
+ * from a performance perspective.
+ */
 function MapWrapper({ hoverData, layers, tooltip, legend, layerSelector }) {
   const [viewport, setViewport] = useState({
     latitude: 59.305477, 

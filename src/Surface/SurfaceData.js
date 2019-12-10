@@ -11,6 +11,13 @@ const material = new MeshBasicMaterial({
   blending: NoBlending
 });
 
+
+/**
+ * This class contains the 3D properties associated with a surface.
+ *
+ * Each Surface has a reference to a SurfaceData object, containing all relevant
+ * properties used for rendering and positioning, etc.
+ */
 export default class SurfaceData {
   constructor(...args) {
     this.initialize(...args);
@@ -59,6 +66,9 @@ export default class SurfaceData {
     };
   }
 
+  /**
+   * Updates the spatial properties of the surface
+   */
   updateLayout(position, rotation, up) {
     this.originalPosition = position.clone();
     this.originalRotation = rotation.clone();
@@ -71,6 +81,9 @@ export default class SurfaceData {
     this.mesh.up = up;
   }
 
+  /** 
+   * Moves the surface to the camera (animated).
+   */
   moveToCamera() {
     const [position, rotation] = this.camera.toCamera(this);
     if (this.mesh.position.manhattanDistanceTo(position) < Number.EPSILON) return;
@@ -79,6 +92,9 @@ export default class SurfaceData {
     this.atOriginalPosition = false;
   }
 
+  /**
+   * Moves the surface back to its original position (animated).
+   */
   moveToOriginal() {
     if (this.mesh.position.manhattanDistanceTo(this.originalPosition) < Number.EPSILON) return;
 
@@ -86,11 +102,17 @@ export default class SurfaceData {
     this.atOriginalPosition = true;
   }
 
+  /**
+   * Toggles between original position and camera position.
+   */
   moveToggle() {
     if (this.atOriginalPosition) this.moveToCamera();
     else this.moveToOriginal();
   }
 
+  /**
+   * Animates surface movement by tweening the position and rotation vectors to target values.
+   */
   moveTransition(targetPosition, targetRotation) {
     // TWEEN
     const duration = 200;

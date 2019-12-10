@@ -1,8 +1,11 @@
 import { useState, useLayoutEffect } from 'react';
 import { Vector3 } from 'three';
 
-// recursively check offset to determine position (in pixels) of the anchor relative to surface.
-// returns null if surface isn't found
+/**
+ * Rcursively check offset to determine position (in pixels) of the anchor relative to surface.
+ * 
+ * Returns null if surface isn't found
+ */
 function offset(element) {
   if (element.offsetParent === null) return { left: 0, top: 0};
   if (element.className === 'surface') return { left: 0, top: 0};
@@ -13,7 +16,14 @@ function offset(element) {
   };
 }
 
+/**
+ * This hook manages the exact positioning of anchored surfaces.
+ * By supplying a parent surface (which the anchored surface attaches to) and the wrapper
+ * to the anchored surface (see AnchoredSurface.jsx) find exactly where the corresponding 3D object
+ * should be positioned and return the spatial anchor data.
+ */
 export default function useGetAnchorData(surface, anchorRef, causeUpdate) {
+  // anchorData should be an array containing 3 values: [position, rotation, up vector].
   const [anchorData, setAnchorData] = useState(null);
 
   useLayoutEffect(() => {

@@ -4,6 +4,9 @@ import withMainSurface from './Surface/withMainSurface';
 import CameraContext from './CameraContext';
 import './Test.css';
 
+/**
+ * Garbage test Surface, just to verify some basic functionality.
+ */
 function Test(props) {
   const [test, setTest] = useState(0);
   const { cameraView } = useContext(CameraContext);
