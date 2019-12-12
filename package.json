@@ -37,7 +37,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "homepage": "https://galnegus.github.io/sharing-cities-demo/",
   "devDependencies": {
     "chromedriver": "^78.0.1",
     "nightwatch": "^1.2.4"
