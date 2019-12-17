@@ -74,7 +74,3 @@
   align-items: center;
   justify-content: center;
 }
-
-#customize-script-container {
-  flex-grow: 1;
-}
