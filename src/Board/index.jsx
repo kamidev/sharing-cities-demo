@@ -6,6 +6,22 @@ import Pamphlet from "./Pamphlet";
 import withMainSurface from "../Surface/withMainSurface";
 import { surfaceDeps } from "../render";
 import "./Board.css";
+import pic1 from "./SAM_4401.JPG";
+import pic2 from "./SAM_4402.JPG";
+import pic3 from "./SAM_4403.JPG";
+import pic4 from "./SAM_4404.JPG";
+import pic5 from "./SAM_4405.JPG";
+import pic6 from "./SAM_4406.JPG";
+import pic7 from "./SAM_4407.JPG";
+import pic8 from "./SAM_4408.JPG";
+import pic9 from "./SAM_4409.JPG";
+import pic10 from "./SAM_4410.JPG";
+import pic11 from "./SAM_4411.JPG";
+import pic12 from "./SAM_4412.JPG";
+import pic13 from "./SAM_4413.JPG";
+import pic14 from "./SAM_4414.JPG";
+import pic15 from "./SAM_4415.JPG";
+import pic16 from "./SAM_4416.JPG";
 
 /**
  * This component is an example of a surface containing anchored surfaces,
@@ -34,137 +50,58 @@ function Board(props) {
         <tbody>
           <tr>
             <td align="center">
-              <img
-                src={process.env.PUBLIC_URL + "/images/SAM_4401.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic1} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4402.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic2} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4403.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic3} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4404.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic4} width={150} height={150} alt={"Bild"} />
             </td>
           </tr>
           <tr>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4405.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic5} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4406.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic6} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4407.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic7} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4408.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic8} width={150} height={150} alt={"Bild"} />
             </td>
           </tr>
           <tr>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4409.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic9} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4410.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic10} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4411.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic11} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4412.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic12} width={150} height={150} alt={"Bild"} />
             </td>
           </tr>
           <tr>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4413.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic13} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4414.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic14} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4415.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic15} width={150} height={150} alt={"Bild"} />
             </td>
             <td align="center">
-              <img
-                img
-                src={process.env.PUBLIC_URL + "/images/SAM_4416.jpg"}
-                width={150}
-                height={150}
-              />
+              <img src={pic16} width={150} height={150} alt={"Bild"} />
             </td>
           </tr>
         </tbody>
