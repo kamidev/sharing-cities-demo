@@ -16,7 +16,7 @@ const farLeftWallProps = {
   width: 1000,
   height: 1000,
   position: new Vector3(1620, 0, -940),
-  rotation: new Euler(0, -2 * Math.PI / 3, 0),
+  rotation: new Euler(0, (-2 * Math.PI) / 3, 0),
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
@@ -24,7 +24,7 @@ const middleLeftWallProps = {
   width: 1000,
   height: 1000,
   position: new Vector3(935, 0, -265),
-  rotation: new Euler(0, -5 * Math.PI / 6, 0),
+  rotation: new Euler(0, (-5 * Math.PI) / 6, 0),
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
@@ -40,7 +40,7 @@ const middleRightWallProps = {
   width: 1000,
   height: 1000,
   position: new Vector3(-930, 0, -270),
-  rotation: new Euler(0, 5 * Math.PI / 6, 0),
+  rotation: new Euler(0, (5 * Math.PI) / 6, 0),
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
@@ -48,16 +48,34 @@ const farRightWallProps = {
   width: 1000,
   height: 1000,
   position: new Vector3(-1620, 0, -940),
-  rotation: new Euler(0, 2 * Math.PI / 3, 0),
+  rotation: new Euler(0, (2 * Math.PI) / 3, 0),
   up: new Vector3(0, 1, 0),
   ...surfaceDeps
 };
 
-const Embedded = withMainSurface(() => {
+const EmbeddedYouTube = withMainSurface(() => {
   return (
-    <div className="embedded">
+    <div className="embedded_youtube">
       <div id="customize-script-container"></div>
-      <Embed url="https://www.youtube.com/watch?v=soICQ3B2kEk" />
+      <Embed url="https://www.youtube.com/watch?v=DcvyXDctjNA" />
+      {/* <Embed url="https://www.youtube.com/watch?v=soICQ3B2kEk" /> */}
+    </div>
+  );
+});
+const EmbeddedTwitter = withMainSurface(() => {
+  return (
+    <div className="embedded_twitter">
+      <div id="customize-script-container"></div>
+      <Embed url="https://twitter.com/CitiesSharing/status/1196350216049496064" />
+    </div>
+  );
+});
+
+const EmbeddedInstagram = withMainSurface(() => {
+  return (
+    <div className="embedded_instagram">
+      <div id="customize-script-container"></div>
+      <Embed url="https://www.instagram.com/p/BTUIoj1gmOQ/" />
     </div>
   );
 });
@@ -78,10 +96,10 @@ function App(props) {
         }}
       >
         <Surface {...farLeftWallProps}>
-          <Test />
+          <EmbeddedTwitter />
         </Surface>
         <Surface {...middleLeftWallProps}>
-          <Embedded />
+          <EmbeddedYouTube />
         </Surface>
         <Surface {...backWallProps}>
           <Board />
