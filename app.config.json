@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "name": "sharing-cities-demo",
+      "script": "npx",
+      "interpreter": "none",
+      "args": "serve -s build -p 5000 "
+    }
+  ]
+}
