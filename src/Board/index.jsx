@@ -34,58 +34,58 @@ function Board(props) {
         <tbody>
           <tr>
             <td align="center">
-              <img src="images/SAM_4401.jpg" width={150} height={150} />
+              <img src="/images/SAM_4401.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4402.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4402.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4403.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4403.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4404.jpg" width={150} height={150} />
-            </td>
-          </tr>
-          <tr>
-            <td align="center">
-              <img img src="images/SAM_4405.jpg" width={150} height={150} />
-            </td>
-            <td align="center">
-              <img img src="images/SAM_4406.jpg" width={150} height={150} />
-            </td>
-            <td align="center">
-              <img img src="images/SAM_4407.jpg" width={150} height={150} />
-            </td>
-            <td align="center">
-              <img img src="images/SAM_4408.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4404.jpg" width={150} height={150} />
             </td>
           </tr>
           <tr>
             <td align="center">
-              <img img src="images/SAM_4409.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4405.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4410.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4406.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4411.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4407.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4412.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4408.jpg" width={150} height={150} />
             </td>
           </tr>
           <tr>
             <td align="center">
-              <img img src="images/SAM_4413.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4409.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4414.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4410.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4415.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4411.jpg" width={150} height={150} />
             </td>
             <td align="center">
-              <img img src="images/SAM_4416.jpg" width={150} height={150} />
+              <img img src="/images/SAM_4412.jpg" width={150} height={150} />
+            </td>
+          </tr>
+          <tr>
+            <td align="center">
+              <img img src="/images/SAM_4413.jpg" width={150} height={150} />
+            </td>
+            <td align="center">
+              <img img src="/images/SAM_4414.jpg" width={150} height={150} />
+            </td>
+            <td align="center">
+              <img img src="/images/SAM_4415.jpg" width={150} height={150} />
+            </td>
+            <td align="center">
+              <img img src="/images/SAM_4416.jpg" width={150} height={150} />
             </td>
           </tr>
         </tbody>
