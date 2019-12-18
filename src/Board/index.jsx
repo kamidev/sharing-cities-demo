@@ -34,7 +34,11 @@ function Board(props) {
         <tbody>
           <tr>
             <td align="center">
-              <img src="/images/SAM_4401.jpg" width={150} height={150} />
+              <img
+                src={process.env.PUBLIC_URL + "/images/SAM_4401.jpg"}
+                width={150}
+                height={150}
+              />
             </td>
             <td align="center">
               <img img src="/images/SAM_4402.jpg" width={150} height={150} />
