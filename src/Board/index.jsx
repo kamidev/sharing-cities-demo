@@ -6,22 +6,24 @@ import Pamphlet from "./Pamphlet";
 import withMainSurface from "../Surface/withMainSurface";
 import { surfaceDeps } from "../render";
 import "./Board.css";
-import pic1 from "./SAM_4401.JPG";
-import pic2 from "./SAM_4402.JPG";
-import pic3 from "./SAM_4403.JPG";
-import pic4 from "./SAM_4404.JPG";
-import pic5 from "./SAM_4405.JPG";
-import pic6 from "./SAM_4406.JPG";
-import pic7 from "./SAM_4407.JPG";
-import pic8 from "./SAM_4408.JPG";
-import pic9 from "./SAM_4409.JPG";
-import pic10 from "./SAM_4410.JPG";
-import pic11 from "./SAM_4411.JPG";
-import pic12 from "./SAM_4412.JPG";
-import pic13 from "./SAM_4413.JPG";
-import pic14 from "./SAM_4414.JPG";
-import pic15 from "./SAM_4415.JPG";
-import pic16 from "./SAM_4416.JPG";
+import pic_banner from "./laneladan_banner.png";
+import pic_message from "./message.png";
+import pic1 from "./SAM_4401.jpg";
+import pic2 from "./SAM_4402.jpg";
+import pic3 from "./SAM_4403.jpg";
+import pic4 from "./SAM_4404.jpg";
+import pic5 from "./SAM_4405.jpg";
+import pic6 from "./SAM_4406.jpg";
+import pic7 from "./SAM_4407.jpg";
+import pic8 from "./SAM_4408.jpg";
+import pic9 from "./SAM_4409.jpg";
+import pic10 from "./SAM_4410.jpg";
+import pic11 from "./SAM_4411.jpg";
+import pic12 from "./SAM_4412.jpg";
+import pic13 from "./SAM_4413.jpg";
+import pic14 from "./SAM_4414.jpg";
+import pic15 from "./SAM_4415.jpg";
+import pic16 from "./SAM_4416.jpg";
 
 /**
  * This component is an example of a surface containing anchored surfaces,
@@ -46,65 +48,43 @@ function Board(props) {
 
   return (
     <div className="board">
-      <table border={10}>
-        <tbody>
-          <tr>
-            <td align="center">
-              <img src={pic1} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic2} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic3} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic4} width={150} height={150} alt={"Bild"} />
-            </td>
-          </tr>
-          <tr>
-            <td align="center">
-              <img src={pic5} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic6} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic7} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic8} width={150} height={150} alt={"Bild"} />
-            </td>
-          </tr>
-          <tr>
-            <td align="center">
-              <img src={pic9} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic10} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic11} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic12} width={150} height={150} alt={"Bild"} />
-            </td>
-          </tr>
-          <tr>
-            <td align="center">
-              <img src={pic13} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic14} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic15} width={150} height={150} alt={"Bild"} />
-            </td>
-            <td align="center">
-              <img src={pic16} width={150} height={150} alt={"Bild"} />
-            </td>
-          </tr>
-        </tbody>
+      <table border={0} cellSpacing={2} cellPadding={2}>
+        <tr>
+          <td bgcolor={"#D01A1F"} align={"center"} colspan={4}>
+            <img width={300} height={40} SRC={pic_banner} />
+          </td>
+        </tr>
+        <tr>
+          <td align={"center"}>
+            <img width={150} height={150} SRC={pic1} />
+          </td>
+          <td align={"center"}>
+            <img width={150} height={150} SRC={pic2} />
+          </td>
+          <td align={"center"}>
+            <img width={150} height={150} SRC={pic3} />
+          </td>
+          <td align={"center"}>
+            <img width={150} height={150} SRC={pic4} />
+          </td>
+        </tr>
+        <tr>
+          <td align="center" colspan={2}>
+            <img width={300} height={300} src={pic5} />
+          </td>
+          <td align="center" colspan={2}>
+            <img width={300} height={300} src={pic6} />
+          </td>
+        </tr>
+
+        <tr>
+          <td align="center" colspan={2}>
+            <img width={300} height={300} src={pic7} />
+          </td>
+          <td align="center" colspan={2}>
+            <img width={300} height={300} src={pic_message} />
+          </td>
+        </tr>
       </table>
       );
       {/* <div className="board__content">
