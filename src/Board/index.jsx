@@ -15,15 +15,6 @@ import pic4 from "./SAM_4404.jpg";
 import pic5 from "./SAM_4405.jpg";
 import pic6 from "./SAM_4406.jpg";
 import pic7 from "./SAM_4407.jpg";
-import pic8 from "./SAM_4408.jpg";
-import pic9 from "./SAM_4409.jpg";
-import pic10 from "./SAM_4410.jpg";
-import pic11 from "./SAM_4411.jpg";
-import pic12 from "./SAM_4412.jpg";
-import pic13 from "./SAM_4413.jpg";
-import pic14 from "./SAM_4414.jpg";
-import pic15 from "./SAM_4415.jpg";
-import pic16 from "./SAM_4416.jpg";
 
 /**
  * This component is an example of a surface containing anchored surfaces,

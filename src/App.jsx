@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { Vector3, Euler } from "three";
-import { Helmet } from "react-helmet";
 import Embed from "react-embed";
 import Surface from "./Surface";
 import Test from "./Test.jsx";
@@ -67,15 +66,6 @@ const EmbeddedTwitter = withMainSurface(() => {
     <div className="embedded_twitter">
       <div id="customize-script-container"></div>
       <Embed url="https://twitter.com/CitiesSharing/status/1196350216049496064" />
-    </div>
-  );
-});
-
-const EmbeddedInstagram = withMainSurface(() => {
-  return (
-    <div className="embedded_instagram">
-      <div id="customize-script-container"></div>
-      <Embed url="https://www.instagram.com/p/BTUIoj1gmOQ/" />
     </div>
   );
 });

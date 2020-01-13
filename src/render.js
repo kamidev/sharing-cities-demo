@@ -1,9 +1,9 @@
 import {
   Scene,
-  DoubleSide,
-  BoxGeometry,
-  MeshPhongMaterial,
-  Mesh,
+  //DoubleSide,
+  //BoxGeometry,
+  //MeshPhongMaterial,
+  //Mesh,
   PointLight,
   WebGLRenderer
 } from "three";
@@ -25,7 +25,7 @@ export const scCamera = new SCCamera();
 const glScene = new Scene();
 const bgScene = new Scene();
 const cssScene = new Scene();
-export const surfaceDeps = { glScene, cssScene, camera: scCamera }; // room with 3 walls
+export const surfaceDeps = { glScene, cssScene, camera: scCamera }; // room with 3 walls // NOTE: all the surfaces defined in App.jsx must be changed when using this
 
 // cube
 /* const geometry = new BoxGeometry(200, 200, 200);
@@ -50,8 +50,7 @@ cubeShadow.castShadow = true;
 cubeShadow.material.transparent = true;
 cubeShadow.material.opacity = 0;
 cubeShadow.position.copy(cube.position);
-bgScene.add(cubeShadow) */ // NOTE: all the surfaces defined in App.jsx must be changed when using this
-const loader = new GLTFLoader();
+bgScene.add(cubeShadow) */ const loader = new GLTFLoader();
 /*loader.load(roomGLB, function (gltf) {
   gltf.scene.scale.multiplyScalar(100);
   gltf.scene.rotation.y = Math.PI;
