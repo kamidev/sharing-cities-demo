@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useContext, useState, useEffect, Fragment } from "react";
 import { Vector3, Euler } from "three";
 import Embed from "react-embed";
 import Surface from "./Surface";
@@ -8,6 +8,7 @@ import MapTest from "./Map";
 import { scCamera, surfaceDeps } from "./render";
 import withMainSurface from "./Surface/withMainSurface";
 import CameraContext from "./contexts/CameraContext";
+import { Auth0Context, useAuth0 } from "./contexts/auth0-context";
 import "./App.css";
 
 // define props for all the main surfaces here, easier that way!
@@ -72,6 +73,9 @@ const EmbeddedTwitter = withMainSurface(() => {
 
 function App(props) {
   const [cameraView, setCameraView] = useState(null);
+  const { isLoading, user, loginWithRedirect, logout } = useAuth0();
+
+  const auth0 = useContext(Auth0Context);
 
   useEffect(() => {
     scCamera.goToSurface(cameraView);
