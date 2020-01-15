@@ -7,7 +7,7 @@ import Board from "./Board";
 import MapTest from "./Map";
 import { scCamera, surfaceDeps } from "./render";
 import withMainSurface from "./Surface/withMainSurface";
-import CameraContext from "./CameraContext";
+import CameraContext from "./contexts/CameraContext";
 import "./App.css";
 
 // define props for all the main surfaces here, easier that way!

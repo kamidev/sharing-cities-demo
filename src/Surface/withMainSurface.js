@@ -1,6 +1,6 @@
-import React, { useContext, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import CameraContext from '../CameraContext';
+import React, { useContext, Fragment } from "react";
+import PropTypes from "prop-types";
+import CameraContext from "../contexts/CameraContext";
 
 /**
  * The HOC component will apply a behaviour to a surface so that when it is clicked,
@@ -17,16 +17,22 @@ export default function withMainSurface(Component) {
 
     return (
       <Fragment>
-        <div className={`surface__content ${!isCameraHere ? 'surface__content--no-pointer' : ''}`}>
+        <div
+          className={`surface__content ${
+            !isCameraHere ? "surface__content--no-pointer" : ""
+          }`}
+        >
           <Component {...props} />
         </div>
         <div
-          className={`surface__overlay ${!isCameraOverview ? 'surface__overlay--hidden' : ''}`}
+          className={`surface__overlay ${
+            !isCameraOverview ? "surface__overlay--hidden" : ""
+          }`}
           onClick={() => setCameraView(props.surface)}
         />
       </Fragment>
     );
-  };
+  }
 
   MainSurface.propTypes = {
     surface: PropTypes.object

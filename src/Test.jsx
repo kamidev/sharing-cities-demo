@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import PropTypes from 'prop-types';
-import withMainSurface from './Surface/withMainSurface';
-import CameraContext from './CameraContext';
-import './Test.css';
+import React, { useState, useContext } from "react";
+import PropTypes from "prop-types";
+import withMainSurface from "./Surface/withMainSurface";
+import CameraContext from "./contexts/CameraContext";
+import "./Test.css";
 
 /**
  * Garbage test Surface, just to verify some basic functionality.
@@ -17,9 +17,7 @@ function Test(props) {
     <div className="test">
       <h1>Hello World</h1>
       <p>{test}</p>
-        {isCameraHere &&
-          <h3>Camera is here</h3>
-        }
+      {isCameraHere && <h3>Camera is here</h3>}
       <button onClick={() => setTest(test + 1)}>Click me</button>
     </div>
   );
