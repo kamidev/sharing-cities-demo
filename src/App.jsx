@@ -8,7 +8,9 @@ import MapTest from "./Map";
 import { scCamera, surfaceDeps } from "./render";
 import withMainSurface from "./Surface/withMainSurface";
 import CameraContext from "./contexts/CameraContext";
+import Header from "./components/Header";
 import { Auth0Context, useAuth0 } from "./contexts/auth0-context";
+import "bulma/css/bulma.css";
 import "./App.css";
 
 // define props for all the main surfaces here, easier that way!
@@ -82,54 +84,63 @@ function App(props) {
   }, [cameraView]);
 
   return (
-    <Fragment>
-      <CameraContext.Provider
-        value={{
-          cameraView,
-          setCameraView
-        }}
-      >
-        <Surface {...farLeftWallProps}>
-          <EmbeddedTwitter />
-        </Surface>
-        <Surface {...middleLeftWallProps}>
-          <EmbeddedYouTube />
-        </Surface>
-        <Surface {...backWallProps}>
-          <Board />
-        </Surface>
-        <Surface {...middleRightWallProps}>
-          <MapTest />
-        </Surface>
-        <Surface {...farRightWallProps}>
-          <Test />
-        </Surface>
-      </CameraContext.Provider>
-
-      <div className="app">
-        <div className="app__content" />
-        <div className="app__overlay">
-          {cameraView !== null && (
-            <div
-              className="app__back-to-overlay"
-              onClick={() => setCameraView(null)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="48"
-                height="48"
-                viewBox="6 6 36 36"
+    <>
+      <Fragment>
+        <Header />
+        {!isLoading && user && (
+          <div className="hero is-info is-fullheight">
+            <div className="hero-body">
+              <CameraContext.Provider
+                value={{
+                  cameraView,
+                  setCameraView
+                }}
               >
-                <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z" />
-              </svg>
-              <div>
-                <span>Back to overview</span>
+                <Surface {...farLeftWallProps}>
+                  <EmbeddedTwitter />
+                </Surface>
+                <Surface {...middleLeftWallProps}>
+                  <EmbeddedYouTube />
+                </Surface>
+                <Surface {...backWallProps}>
+                  <Board />
+                </Surface>
+                <Surface {...middleRightWallProps}>
+                  <MapTest />
+                </Surface>
+                <Surface {...farRightWallProps}>
+                  <Test />
+                </Surface>
+              </CameraContext.Provider>
+
+              <div className="app">
+                <div className="app__content" />
+                <div className="app__overlay">
+                  {cameraView !== null && (
+                    <div
+                      className="app__back-to-overlay"
+                      onClick={() => setCameraView(null)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="48"
+                        height="48"
+                        viewBox="6 6 36 36"
+                      >
+                        <path d="M40 22h-24.34l11.17-11.17-2.83-2.83-16 16 16 16 2.83-2.83-11.17-11.17h24.34v-4z" />
+                      </svg>
+                      <div>
+                        <span>Back to overview</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          )}
-        </div>
-      </div>
-    </Fragment>
+          </div>
+        )}
+      </Fragment>
+    </>
   );
 }
 
