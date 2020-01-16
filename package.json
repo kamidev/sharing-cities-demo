@@ -22,7 +22,7 @@
     "three": "^0.110.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "rm -rf node_modules/p4-css/.git && npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "rm -rf node_modules/p4-css/.git && react-scripts build",
