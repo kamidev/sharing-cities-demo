@@ -25,7 +25,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "rm -rf node_modules/p4-css/.git && react-scripts build",
     "test": "react-scripts test",
     "e2e-test": "./node_modules/.bin/nightwatch",
     "eject": "react-scripts eject"
