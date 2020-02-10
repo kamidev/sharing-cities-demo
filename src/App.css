@@ -19,6 +19,20 @@
   pointer-events: none;
 }
 
+.info_before_login {
+  position: absolute;
+  text-align: center;
+  font-size: 0.8vw;
+  top: 38%;
+  left: 33%;
+  width: 33%;
+  height: 100%;
+  padding: 20px;
+  background: rgb(255, 255, 255, 0.5);
+
+  pointer-events: none;
+}
+
 .app__overlay button {
 }
 
