@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import { Auth0Context, useAuth0 } from "./contexts/auth0-context";
 import "bulma/css/bulma.css";
 import "./App.css";
+import poster_small from "./poster_small.png";
 
 // define props for all the main surfaces here, easier that way!
 const farLeftWallProps = {
@@ -90,102 +91,20 @@ function App(props) {
         {!isLoading && !user && (
           <>
             <div className="info_before_login">
-              <h1 className="c6" id="h.vrhvb96nxxe9">
-                <span>Rubriker</span>
-              </h1>
-              <ul className="c0 lst-kix_i5yx34vs96em-0 start" start={1}>
-                <li className="c2">
-                  <span>Avsiktsförklaring</span>
-                </li>
-                <li className="c2">
-                  <span>Bakgrund</span>
-                </li>
-                <li className="c2">
-                  <span>Användning, handhavande</span>
-                </li>
-                <li className="c2">
-                  <span>Vanliga frågor (FAQ)</span>
-                </li>
-                <li className="c2">
-                  <span>Hantering av personuppgifter</span>
-                </li>
-              </ul>
-              <h1 className="c6" id="h.fnjk6vnqzbqk">
-                <span>Avsiktförklaring</span>
-              </h1>
-              <h2 className="c8" id="h.iwerjkqkfkua">
-                <span>Låna av varandra</span>
-              </h2>
               <p className="c9">
                 <span className="c17">
-                  Cirkulär ekonomi innebär att man försöker tära mindre på
-                  naturens resurser, och där ingår en tanke; en strävan efter
-                  att kunna återanvända istället för att ständigt slänga och
-                  köpa nytt. Allt man har används ju inte heller hela tiden,
-                  kanske har du något du skulle kunna tänka dig att låna ut?
+                  Sidan är under uppbyggnad – välkomna tillbaka senare i
+                  februari!
                 </span>
               </p>
               <p className="c9">
-                <span className="c23">
-                  Vi hoppas att många kan fatta bra beslut, och att det ska vara
-                  enkelt att låna ut saker, och att Lånelådan ska kunna hjälpa
-                  till så att man ibland slipper vänta på varandra, bestämma
-                  tider utan kan hämta eller lämna när det passar dig själv.
-                </span>
-              </p>
-              <p className="c9 c18">
-                <span className="c1" />
-              </p>
-              <h1 className="c6" id="h.chto247rp9sq">
-                <span>Bakgrund</span>
-              </h1>
-              <p className="c9">
-                <span className="c14">
-                  Vad är det för ett mystiskt skåp som står i vårt kvarter?{" "}
-                </span>
                 <span>
-                  Lånelådan har totalt sju skåp, tre stora och fyra lite mindre
-                  som man kan lägga saker i. Man bokar ett skåp där man kan
-                  lämna eller hämta upp ifrån med hjälp av din mobiltelefon.{" "}
+                  Tills vidare kan ni i BRF Knallen och Holmen fylla i enkäten
+                  ovan.
                 </span>
               </p>
-              <h1 className="c6" id="h.cwpgxthk12l6">
-                <span>Handhavande</span>
-              </h1>
-              <p className="c7 c21">
-                <span className="c16" />
-              </p>
-              <p className="c7 c21">
-                <span className="c1" />
-              </p>
-              <p className="c7">
-                <span className="c1">
-                  Allt du behöver är mobilappen “Lånelådan” som du använder för
-                  att boka och öppna skåpen. &nbsp;Efter n
-                </span>
-              </p>
-              <p className="c7 c21">
-                <span className="c1" />
-              </p>
-              <p className="c7">
-                <span>
-                  I appen kan du allt som finns att låna, och vad som är{" "}
-                </span>
-                <span>tillgängligt</span>
-                <span className="c1">
-                  &nbsp;just nu för utlån.. När du har hittat det du behöver,
-                  kontrollerar du om det är tillgängligt och var du kan hämta
-                  det. Vid Lånelådan använder du appen för att öppna skåpet för
-                  att stoppa i saker och för att låsa det när du returnerar det
-                  du lånat.
-                </span>
-              </p>
-              <p className="c7">
-                <span>
-                  Varmt välkomna att prova Lånelådan, det kostar ingenting att
-                  använda den! &nbsp;
-                </span>
-              </p>
+              <br />
+              <img src={poster_small} alt="Image missing" />
             </div>
           </>
         )}

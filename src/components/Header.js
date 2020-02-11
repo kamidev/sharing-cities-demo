@@ -12,17 +12,20 @@ export default function Header() {
           <div className="navbar-menu is-active">
             {/* logo */}
             <div className="navbar-brand">
-              <button className="navbar-item">Lånelådan!</button>
+              <div class="button">
+                <a
+                  id="link"
+                  href="https://forms.gle/Kn9W4fVj3mG1TJK58"
+                  target="_blank"
+                >
+                  Fyll i enkät!
+                </a>
+              </div>
             </div>
 
             {/* menu items */}
             <div className="navbar-end">
               {/* if there is no user. show the login button */}
-              {!isLoading && !user && (
-                <button onClick={loginWithRedirect} className="navbar-item">
-                  Logga in
-                </button>
-              )}
 
               {/* if there is a user. show user name and logout button */}
               {!isLoading && user && (
