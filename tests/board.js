@@ -1,5 +1,5 @@
 module.exports = {
-  "Check that SharingCities portal is visible and has expected parts": function(
+  "Check that SharingCities portal shows up in logged-out state": function(
     browser
   ) {
     browser
@@ -7,7 +7,9 @@ module.exports = {
       .url(browser.launchUrl)
       .waitForElementVisible("body", 1000)
       .waitForElementVisible("#canvas", 1000)
-      .waitForElementVisible("div.board", 1000)
+      .waitForElementVisible("#root", 1000)
+      .waitForElementVisible(".container", 1000)
+      .waitForElementVisible(".navbar-end", 1000)
       .end();
   }
 };
