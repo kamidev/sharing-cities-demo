@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). React scripts have been manually updated to stay current.
 
 ## Installing updated versions
 
@@ -38,7 +38,7 @@ Other services can be added by creating your own template.
 
 ### react-helmet: https://github.com/nfl/react-helmet
 
-Manipulates HTML header. Can be used to display an external widget.
+Manipulates HTML header. Can be used to display external widgets.
 
 ## Available NPM scripts
 
@@ -52,13 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
 
-### `npm test`
-
-Launches the default React test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-Note! For this application, default tests currently doesn't work.
-
-### ´npm e2e-test"
+### ´npm run e2e-test"
 
 Runs all functional [Nightwatch tests](https://nightwatchjs.org/) in folder "tests".
 
@@ -83,6 +77,12 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm test`
+
+Launches the default React test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Note! For this application, default tests currently doesn't work.
 
 ### `npm run eject`
 
