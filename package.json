@@ -1,6 +1,6 @@
 {
   "name": "sharing-cities-demo",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "private": true,
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.4",
